@@ -8,7 +8,7 @@
 #### RedHat系列:
 `yum install python3`
 #### Arch系列:
-`pacman install python3`
+`pacman -S python3`
 #### 查看是否安装成功:
 `python3 --version`
 
@@ -60,9 +60,23 @@
 #### 安装后续所需的模块
 
 `pip install -r requirements.txt`
+***
+## 4 安装数据库PostgreSQL
+`sudo apt install postgresql postgresql-client`
 
+#### 查看是否安装成功
 
-# 项目启动命令
+`psql --version`
+ 
+# 项目启动
+#### 登录PostgreSQ
+
+`sudo su - postgres`
+
+`psql`
+#### 创建数据库charity
+
+`create database charity;`
 #### 在项目文件夹下打开终端
 `python3 app.py`
 
