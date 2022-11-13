@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大爱无疆慈善中心主页</title>
+    <style>
+        body {
+            background-color: pink;
+        }
+
+        #main {
+            height: auto;
+            width: 100%;
+            background-image: url("../static/background05.jpg");
+            background-attachment: fixed;
+            background-position-x: 20%;
+            background-repeat: repeat-y;
+            text-align: center;
+        }
+
+        #head {
+            text-align: center;
+            font-size: 50px;
+            color: orange;
+            font-weight: 700;
+            letter-spacing: 10px;
+        }
+
+        #nav {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            color: yellow;
+            font-size: 30px;
+        }
+
+        #nav li {
+            margin: 0 80px;
+        }
+
+        span {
+            color: aqua;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        h2 {
+            color: red;
+            font-size: 45px;
+            margin: 0;
+        }
+
+        hr {
+            color: aquamarine;
+        }
+
+
+        table {
+            width: 100%;
+            height: 500px;
+            border: 5px black solid;
+        }
+
+        table td,
+        th {
+            border: 5px black solid;
+        }
+
+        table th {
+            color: yellow;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        table td {
+            color: lightgreen;
+            font-size: 20px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="head">
+            <h1>欢迎登录大爱无疆慈善中心</h1>
+            <ul id="nav">
+                <li>登录账号: <span>{{logID}}</span></li>
+                <li>登录名称: <span>{{logName}}</span></li>
+            </ul>
+        </div>
+        <hr>
+        <h2>慈善机构列表</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>类别</th>
+                <th>电话</th>
+                <th>省份</th>
+                <th>城市</th>
+                <th>街道</th>
+                <th>年度决算</th>
+            </tr>
+            {% for charity in charities %}
+            <tr>
+                <td>{{ charity.charity_id }}</td>
+                <td>{{ charity.name }}</td>
+                <td>{{ charity.category }}</td>
+                <td>{{ charity.telephone }}</td>
+                <td>{{ charity.state }}</td>
+                <td>{{ charity.city }}</td>
+                <td>{{ charity.address }}</td>
+                <td>{{ charity.revenue }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <hr>
+        <h2>捐赠者列表</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>姓氏</th>
+                <th>名字</th>
+                <th>电话</th>
+                <th>省份</th>
+                <th>城市</th>
+                <th>街道</th>
+                <th>邮编</th>
+            </tr>
+            {% for donor in donors %}
+            <tr>
+                <td>{{ donor.donor_id }}</td>
+                <td>{{ donor.last_name }}</td>
+                <td>{{ donor.first_name }}</td>
+                <td>{{ donor.telephone }}</td>
+                <td>{{ donor.state }}</td>
+                <td>{{ donor.city }}</td>
+                <td>{{ donor.address }}</td>
+                <td>{{ donor.zip }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>

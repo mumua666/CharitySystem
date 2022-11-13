@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大爱无疆慈善中心注册页</title>
+    <style>
+        #main {
+            position: relative;
+            height: 900px;
+            width: 100%;
+            background-image: url('../static/background05.jpg');
+            background-position-x: 20%;
+            text-align: center;
+        }
+
+        #signUp {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            text-align: center;
+            margin: 0 auto;
+            transform: translateX(-50%);
+            display: inline-block;
+        }
+
+        #signUp p {
+            font-size: 26px;
+            color: red;
+            font-weight: 700;
+        }
+
+        #signUp input {
+            height: 50px;
+            width: 75%;
+            margin: 0 auto;
+            font-size: 20px;
+            letter-spacing: 3px;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            color: yellow;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 192, 203, 0.49);
+        }
+
+        #signUp .gray {
+            color: gray;
+            font-size: 20px;
+        }
+
+        #signUp .prompt {
+            font-size: 20px;
+            letter-spacing: 3px;
+            color: pink;
+        }
+
+        #special {
+            font-size: 20px;
+            color: pink;
+            letter-spacing: 0;
+        }
+
+        span {
+            font-size: 20px;
+            color: white;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="signUp">
+            <form method="post">
+                <span class="prompt">账户:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="account"
+                    value="六位数字或字母"><br><br>
+                <span class="prompt">密码:</span> &nbsp &nbsp &nbsp &nbsp<input type="password" name="password"><br><br>
+                <span id="special">确认密码: &nbsp</span><input type="password" name="password2"><br> <br>
+                <span class="prompt">姓氏:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="last_name"><br><br>
+                <span class="prompt">名字:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="first_name"><br><br>
+                <span class="prompt">电话:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="telphone"
+                    value="11位数字"><br><br>
+                <span class="prompt">省份:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="state"><br><br>
+                <span class="prompt">城市:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="city"><br><br>
+                <span class="prompt">街道:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="street"><br><br>
+                <span class="prompt">邮编:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="zipCode"
+                    value="6位数字"><br><br>
+
+                <br><br><br>
+                &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                <input type="submit" value="注册"><br>
+                {% for message in get_flashed_messages() %}
+                &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                &nbsp &nbsp &nbsp
+                <span> {{ message }}</span>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

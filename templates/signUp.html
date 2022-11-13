@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #main {
+            position: relative;
+            height: 900px;
+            width: 100%;
+            background-image: url('../static/background05.jpg');
+            background-position-x: 20%;
+            text-align: center;
+        }
+
+        #main button {
+            height: 80px;
+            width: 50%;
+            margin: 0 auto;
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            color: yellow;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(255, 192, 203, 0.49);
+        }
+
+        #button1 {
+            position: relative;
+            top: 30%;
+        }
+
+        #button2 {
+            position: relative;
+            top: 50%;
+        }
+
+        #main a {
+            text-decoration: none;
+            color: pink;
+        }
+
+        /* 
+        #main a:visited {
+            color: rgba(128, 128, 128, 0.5);
+        } */
+
+        #main a:hover {
+            color: blue;
+        }
+
+        #main a:active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <button id="button1"><a href="signUpDonor.html">注册为捐赠者</a></button>
+        <button id="button2"><a href="signUpCharity.html">注册为慈善方</a></button>
+    </div>
+</body>
+
+</html>

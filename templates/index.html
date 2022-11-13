@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大爱无疆慈善中心登录页</title>
+    <style>
+        #main {
+            position: relative;
+            height: 900px;
+            width: 100%;
+            background-image: url('../static/background04.jpeg');
+            background-size: 100% auto;
+            text-align: center;
+        }
+
+        #logIn {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            text-align: center;
+            margin: 0 auto;
+            transform: translateX(-50%);
+            display: inline-block;
+        }
+
+        #logIn p {
+            font-size: 26px;
+            color: red;
+            font-weight: 700;
+        }
+
+        #logIn input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            margin: 0 auto;
+            font-size: 20px;
+            letter-spacing: 3px;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            color: red;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 192, 203, 0.498);
+        }
+
+
+        #logIn a {
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        #logIn a:visited {
+            color: rgba(128, 128, 128, 0.5);
+        }
+
+        #logIn a:hover {
+            color: blue;
+        }
+
+        #logIn a:active {
+            color: red;
+        }
+
+        span {
+            font-size: 20px;
+            color: white;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="logIn">
+            <img src="../static/logo01.png" alt="登录业Logo">
+            <p>赠人玫瑰，手有余香</p>
+            <form method="post">
+                <input type="account" name="account" value="请输入账号"><br>
+                <input type="password" name="password" value="请输入用户名"><br>
+                <br><br><br>
+                <input type="submit" value="登录"><br>
+                <p><a href="./signUp.html">没有账号？点我注册</a></p>
+                {% for message in get_flashed_messages() %}
+                <span> {{ message }}</span>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
