@@ -79,5 +79,7 @@
 `create database charity;`
 #### 在项目文件夹下打开终端
 `python3 app.py`
-
+# Flask帮助文档使用
+### 1. 将Documents文件夹下的`index.html` 文件拖到浏览器地址栏打开即可
+### 2. Examples文件夹下提供了与Documents教程对应的实例
 
