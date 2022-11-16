@@ -29,7 +29,8 @@
             letter-spacing: 10px;
         }
 
-        #nav {
+        #nav,
+        #menu {
             list-style: none;
             display: flex;
             justify-content: center;
@@ -37,9 +38,23 @@
             font-size: 30px;
         }
 
-        #nav li {
+        #nav li,
+        #menu li {
             margin: 0 80px;
         }
+
+        /* #menu li {
+            width: 150px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            color: rgb(0, 255, 89);
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(220, 226, 41, 0.49);
+        } */
 
         span {
             color: aqua;
@@ -94,6 +109,13 @@
                 <li>登录名称: <span>{{logName}}</span></li>
             </ul>
         </div>
+        <hr>
+        <form method="post">
+            <ul id="menu">
+                <li><input type="submit" value="修改信息" class="input" name="changeInfo"></li>
+                <li><input type="submit" value="注销账户" class="input" name="deleteItem"></li>
+            </ul>
+        </form>
         <hr>
         <h2>慈善机构列表</h2>
         <table>

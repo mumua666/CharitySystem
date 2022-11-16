@@ -128,8 +128,8 @@ def signUpDonor():
             flash('两次输入密码不一致！！！')
         elif id:
             flash('账号已存在!!!')
-        elif len(account) != 6:
-            flash('账号长度必须为6位!!!')
+        elif len(account) != 7:
+            flash('账号长度必须为7位!!!')
         elif len(zipCode) != 6:
             flash('邮编长度必须为6位!!!')
         elif len(telphone) != 11:
@@ -180,8 +180,8 @@ def signUpCharity():
             flash('账号已存在!!!')
         elif _name:
             flash('机构名称已被注册!!!')
-        elif len(account) != 6:
-            flash('账号长度必须为6位数字!!!')
+        elif len(account) != 7:
+            flash('账号长度必须为7位!!!')
         elif len(telphone) != 11:
             flash('电话号码必须是11位数字!!!')
         elif _telphone:
@@ -226,6 +226,23 @@ def homePage():
         logName = donor.last_name+donor.first_name
     elif charity:
         logName = charity.name
+    if request.method == 'POST':
+        if donor:
+            db.session.delete(donor)
+            db.session.commit()
+        elif charity:
+            db.session.delete(charity)
+            db.session.commit()
+        changeInfo = request.form.get('changeInfo')
+        deleteItem = request.form.get('deleteItem')
+        if changeInfo:
+            if donor:
+                return redirect(url_for('signUpDonor'))
+            elif charity:
+                return redirect(url_for('signUpCharity'))
+        elif deleteItem:
+            return redirect(url_for('index'))
+
     return render_template('homePage.html', donors=donors, charities=charities, logID=logID.log_id, logName=logName)
 
 
