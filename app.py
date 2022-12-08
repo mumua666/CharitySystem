@@ -84,8 +84,10 @@ class Log(db.Model):
     __tablename__ = 'log'
     # 定义列对象
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    log_id = db.Column(db.String(32), unique=False)
-    operation = db.Column(db.String(255), unique=False)
+    log_id = db.Column(db.String(255), unique=False)
+    operation_table = db.Column(db.String(255), unique=False, nullable=True)
+    operation_name = db.Column(db.String(255), unique=False)
+    operation_tuple = db.Column(db.String(255), unique=False, nullable=True)
     log_time = db.Column(db.String(255), unique=False)
 
 
@@ -111,7 +113,7 @@ def index():
             flash("密码错误!!!")
         else:
             curr_time = datetime.datetime.now()
-            log = Log(log_id=account, operation="登录", log_time=datetime.datetime.strftime(
+            log = Log(log_id=account, operation_name="登录", log_time=datetime.datetime.strftime(
                 curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
@@ -161,7 +163,7 @@ def signUpDonor():
             db.session.commit()
 
             curr_time = datetime.datetime.now()
-            log = Log(log_id=account, operation="注册", log_time=datetime.datetime.strftime(
+            log = Log(log_id=account, operation_table='donor', operation_name="添加", operation_tuple=account, log_time=datetime.datetime.strftime(
                 curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
@@ -222,7 +224,7 @@ def signUpCharity():
                 flash("填入数据错误！！！")
 
             curr_time = datetime.datetime.now()
-            log = Log(log_id=account, operation="注册", log_time=datetime.datetime.strftime(
+            log = Log(log_id=account, operation_table='charity', operation_name="添加", operation_tuple=account, log_time=datetime.datetime.strftime(
                 curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
@@ -262,15 +264,16 @@ def homePage():
         if MG:
             displayGift = not displayGift
         if changeInfo:
+            curr_time = datetime.datetime.now()
+            log = ''
             if donor:
                 db.session.delete(donor)
-                db.session.commit()
+                log = Log(log_id=logID.log_id,  operation_table='donor', operation_name="修改", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
+                    curr_time, '%Y-%m-%d %H:%M:%S'))
             elif charity:
                 db.session.delete(charity)
-                db.session.commit()
-            curr_time = datetime.datetime.now()
-            log = Log(log_id=logID.log_id, operation="修改", log_time=datetime.datetime.strftime(
-                curr_time, '%Y-%m-%d %H:%M:%S'))
+                log = Log(log_id=logID.log_id,  operation_table='charity', operation_name="修改", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
+                    curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             if donor:
@@ -278,15 +281,16 @@ def homePage():
             elif charity:
                 return redirect(url_for('signUpCharity'))
         elif deleteItem:
+            curr_time = datetime.datetime.now()
+            log = ''
             if donor:
                 db.session.delete(donor)
-                db.session.commit()
+                log = Log(log_id=logID.log_id,  operation_table='donor', operation_name="删除", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
+                    curr_time, '%Y-%m-%d %H:%M:%S'))
             elif charity:
                 db.session.delete(charity)
-                db.session.commit()
-            curr_time = datetime.datetime.now()
-            log = Log(log_id=logID.log_id, operation="删除", log_time=datetime.datetime.strftime(
-                curr_time, '%Y-%m-%d %H:%M:%S'))
+                log = Log(log_id=logID.log_id,  operation_table='charity', operation_name="删除", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
+                    curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             return redirect(url_for('index'))
@@ -332,15 +336,15 @@ if __name__ == '__main__':
     db.session.commit()
 
     curr_time = datetime.datetime.now()
-    log1 = Log(log_id=c1.charity_id, operation="注册", log_time=datetime.datetime.strftime(
+    log1 = Log(log_id=c1.charity_id, operation_name="注册", log_time=datetime.datetime.strftime(
         curr_time, '%Y-%m-%d %H:%M:%S'))
-    log2 = Log(log_id=c2.charity_id, operation="注册", log_time=datetime.datetime.strftime(
+    log2 = Log(log_id=c2.charity_id, operation_name="注册", log_time=datetime.datetime.strftime(
         curr_time, '%Y-%m-%d %H:%M:%S'))
-    log3 = Log(log_id=c3.charity_id, operation="注册", log_time=datetime.datetime.strftime(
+    log3 = Log(log_id=c3.charity_id, operation_name="注册", log_time=datetime.datetime.strftime(
         curr_time, '%Y-%m-%d %H:%M:%S'))
-    log4 = Log(log_id=d1.donor_id, operation="注册", log_time=datetime.datetime.strftime(
+    log4 = Log(log_id=d1.donor_id, operation_name="注册", log_time=datetime.datetime.strftime(
         curr_time, '%Y-%m-%d %H:%M:%S'))
-    log5 = Log(log_id=d2.donor_id, operation="注册", log_time=datetime.datetime.strftime(
+    log5 = Log(log_id=d2.donor_id, operation_name="注册", log_time=datetime.datetime.strftime(
         curr_time, '%Y-%m-%d %H:%M:%S'))
     db.session.add_all([log1, log2, log3, log4, log5])
     db.session.commit()
