@@ -30,7 +30,8 @@
         }
 
         #nav,
-        #menu {
+        #menu,
+        #queryBar {
             list-style: none;
             display: flex;
             justify-content: center;
@@ -38,13 +39,19 @@
             font-size: 30px;
         }
 
+        #queryBar {
+            display: block;
+        }
+
         #nav li,
         #menu li {
             margin: 0 80px;
         }
 
-        /* #menu li {
+        .input {
             width: 150px;
+            height: 40px;
+            font-size: 26px;
             font-weight: 700;
             letter-spacing: 3px;
             box-sizing: border-box;
@@ -52,9 +59,24 @@
             outline: none;
             color: rgb(0, 255, 89);
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             background-color: rgba(220, 226, 41, 0.49);
-        } */
+        }
+
+        .query {
+            width: 500px;
+            height: 40px;
+            font-size: 26px;
+            font-weight: 700;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            color: rgb(0, 255, 89);
+            border: none;
+            border-radius: 15px;
+            background-color: rgba(220, 226, 41, 0.49);
+            margin: 5px 0;
+        }
 
         span {
             color: aqua;
@@ -77,13 +99,13 @@
 
         table {
             width: 100%;
-            height: 500px;
-            border: 5px black solid;
+            border: 1px black solid;
+            margin-bottom: 100px;
         }
 
         table td,
         th {
-            border: 5px black solid;
+            border: 1px black solid;
         }
 
         table th {
@@ -97,6 +119,12 @@
             font-size: 20px;
             font-weight: 700;
         }
+
+        #footer {
+            height: 100px;
+            font-size: 20px;
+            color: white;
+        }
     </style>
 </head>
 
@@ -109,16 +137,36 @@
                 <li>登录名称: <span>{{logName}}</span></li>
             </ul>
         </div>
-        <hr>
         <form method="post">
             <ul id="menu">
                 <li><input type="submit" value="修改信息" class="input" name="changeInfo"></li>
                 <li><input type="submit" value="注销账户" class="input" name="deleteItem"></li>
             </ul>
         </form>
+        <form method="post">
+            <ul id="queryBar">
+                <li>
+                    <input type="submit" value="Charities rated by Program Expenses" class="query" name="CPE">
+                </li>
+                <li>
+                    <input type="submit" value="Donors by Requested Category" class="query" name="DRC">
+                </li>
+                <li>
+                    <input type="submit" value="Top Giver of Requested Charity" class="query" name="TGRC">
+                </li>
+                <li>
+                    <input type="submit" value="Frequency of Giving by Donor" class="query" name="FGD">
+                </li>
+                <li>
+                    <input type="submit" value="Matching Gifts" class="query" name="MG">
+                </li>
+            </ul>
+        </form>
         <hr>
+        {% if displayCharity %}
+        {% if charities %}
         <h2>慈善机构列表</h2>
-        <table>
+        <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
                 <th>名称</th>
@@ -127,7 +175,7 @@
                 <th>省份</th>
                 <th>城市</th>
                 <th>街道</th>
-                <th>年度决算</th>
+                <th>慈善支出</th>
             </tr>
             {% for charity in charities %}
             <tr>
@@ -138,14 +186,18 @@
                 <td>{{ charity.state }}</td>
                 <td>{{ charity.city }}</td>
                 <td>{{ charity.address }}</td>
-                <td>{{ charity.revenue }}</td>
+                <td>{{ charity.expenses.program }}</td>
             </tr>
             {% endfor %}
         </table>
-
-        <hr>
+        {% else %}
+        <h2>当前尚无慈善机构注册</h2>
+        {% endif %}
+        {% endif %}
+        {% if displayDonor %}
+        {% if donors %}
         <h2>捐赠者列表</h2>
-        <table>
+        <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
                 <th>姓氏</th>
@@ -169,6 +221,47 @@
             </tr>
             {% endfor %}
         </table>
+        {% else %}
+        <h2>当前尚无捐赠者注册</h2>
+        {% endif %}
+        {% endif %}
+        {% if displayGift %}
+        {% if gifts%}
+        <h2>捐赠物列表</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>捐赠类别</th>
+                <th>捐赠方</th>
+                <th>受赠方</th>
+                <th>捐赠日期</th>
+                <th>捐赠数量</th>
+            </tr>
+            {% for gift in gifts %}
+            <tr>
+                <td>{{ gift.gift_name }}</td>
+                {%if gift.gift_donors %}
+                <td>{{ gift.gift_donors.last_name+gift.gift_donors.first_name }}</td>
+                {% else %}
+                <td>匿名者</td>
+                {% endif %}
+                {%if gift.gift_charities %}
+                <td>{{ gift.gift_charities.name }}</td>
+                {% else %}
+                <td>已注销</td>
+                {% endif %}
+                <td>{{ gift.date }}</td>
+                <td>{{ gift.amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>当前尚未收到任何捐赠</h2>
+        {% endif %}
+        {% endif %}
+        <div id="footer">
+            <p>CharitySystem Powered By Flask</p>
+            <p>Copyright &copy 2022 All Rights Reserved</p>
+        </div>
     </div>
 </body>
 

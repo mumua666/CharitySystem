@@ -8,10 +8,12 @@ app = Flask(__name__)
 ctx = app.app_context()
 ctx.push()
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Linux_Mumu@localhost/charity'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
-app.secret_key = 'Linux_Mumu'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Linux_Mumu@localhost/charity'
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_ECHO'] = True
+# app.config['SECRET_KEY'] = 'Linux_Mumu'
+# app.secret_key = 'Linux_Mumu'
+app.config.from_pyfile('settings.py')
 
 db = SQLAlchemy(app)
 
@@ -30,14 +32,14 @@ class Charity(db.Model):
     # 定义表名
     __tablename__ = 'charity'
     # 定义列对象
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    charity_id = db.Column(db.String(32), unique=True)
+    # id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    charity_id = db.Column(db.String(32), primary_key=True, unique=True)
     password = db.Column(db.String(32), unique=False)
     category = db.Column(db.String(32), unique=False)
     name = db.Column(db.String(32), unique=True)
     address = db.Column(db.String(32), unique=True)
     city = db.Column(db.String(32), unique=False)
-    state = db.Column(db.String(32), unique=False)
+    state = db.Column(db.String(32), unique=False, nullable=True)
     telephone = db.Column(db.String(32), unique=True)
     revenue = db.Column(db.Integer, unique=False)
     expense = db.Column(db.Integer, db.ForeignKey(
@@ -49,8 +51,8 @@ class Donor(db.Model):
     # 定义表名
     __tablename__ = 'donor'
     # 定义列对象
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    donor_id = db.Column(db.String(32), unique=True)
+    # id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    donor_id = db.Column(db.String(32), primary_key=True, unique=True)
     password = db.Column(db.String(32), unique=False)
     last_name = db.Column(db.String(32), unique=False)
     first_name = db.Column(db.String(32), unique=False)
@@ -61,6 +63,22 @@ class Donor(db.Model):
     telephone = db.Column(db.String(32), unique=True)
 
 
+class Gift(db.Model):
+    # 定义表名
+    __tablename__ = 'gift'
+    # 定义列对象
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    gift_name = db.Column(db.String(32), unique=False)
+    gift_donor = db.Column(db.String(32), db.ForeignKey(
+        'donor.donor_id'), unique=False)
+    gift_charity = db.Column(db.String(32), db.ForeignKey(
+        'charity.charity_id'), unique=False)
+    date = db.Column(db.String(32), unique=False)
+    amount = db.Column(db.Integer, unique=False)
+    gift_donors = db.relationship('Donor', backref='gift')
+    gift_charities = db.relationship('Charity', backref='gift')
+
+
 class Log(db.Model):
     # 定义表名
     __tablename__ = 'log'
@@ -68,7 +86,7 @@ class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     log_id = db.Column(db.String(32), unique=False)
     operation = db.Column(db.String(255), unique=False)
-    log_time = db.Column(db.String(255), unique=True)
+    log_time = db.Column(db.String(255), unique=False)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -217,33 +235,64 @@ def signUpCharity():
 @app.route('/homePage.html', methods=['GET', 'POST'])
 def homePage():
     donors = Donor.query.all()
-    charities = Charity.query.all()
-    logID = Log.query.order_by(desc(Log.log_id)).first()
+    charities = Charity.query.order_by(desc(Charity.revenue))
+    gifts = Gift.query.all()
+    logID = Log.query.order_by(desc(Log.log_time)).first()
     donor = Donor.query.filter_by(donor_id=logID.log_id).first()
     charity = Charity.query.filter_by(charity_id=logID.log_id).first()
     logName = ""
+    displayCharity = False
+    displayDonor = False
+    displayGift = False
     if donor:
         logName = donor.last_name+donor.first_name
     elif charity:
         logName = charity.name
     if request.method == 'POST':
-        if donor:
-            db.session.delete(donor)
-            db.session.commit()
-        elif charity:
-            db.session.delete(charity)
-            db.session.commit()
+
         changeInfo = request.form.get('changeInfo')
         deleteItem = request.form.get('deleteItem')
+        CPE = request.form.get('CPE')
+        DRC = request.form.get('DRC')
+        MG = request.form.get('MG')
+        if CPE:
+            displayCharity = not displayCharity
+        if DRC:
+            displayDonor = not displayDonor
+        if MG:
+            displayGift = not displayGift
         if changeInfo:
+            if donor:
+                db.session.delete(donor)
+                db.session.commit()
+            elif charity:
+                db.session.delete(charity)
+                db.session.commit()
+            curr_time = datetime.datetime.now()
+            log = Log(log_id=logID.log_id, operation="修改", log_time=datetime.datetime.strftime(
+                curr_time, '%Y-%m-%d %H:%M:%S'))
+            db.session.add(log)
+            db.session.commit()
             if donor:
                 return redirect(url_for('signUpDonor'))
             elif charity:
                 return redirect(url_for('signUpCharity'))
         elif deleteItem:
+            if donor:
+                db.session.delete(donor)
+                db.session.commit()
+            elif charity:
+                db.session.delete(charity)
+                db.session.commit()
+            curr_time = datetime.datetime.now()
+            log = Log(log_id=logID.log_id, operation="删除", log_time=datetime.datetime.strftime(
+                curr_time, '%Y-%m-%d %H:%M:%S'))
+            db.session.add(log)
+            db.session.commit()
             return redirect(url_for('index'))
 
-    return render_template('homePage.html', donors=donors, charities=charities, logID=logID.log_id, logName=logName)
+    return render_template('homePage.html', donors=donors, charities=charities, gifts=gifts, logID=logID.log_id, logName=logName,
+                           displayCharity=displayCharity, displayDonor=displayDonor, displayGift=displayGift)
 
 
 if __name__ == '__main__':
@@ -258,7 +307,7 @@ if __name__ == '__main__':
 
     c1 = Charity(charity_id="c000001", password="c000001", category="动物保护", name="关爱动物中心", address="深圳南山区xxxx", city="深圳",
                  state="广东", telephone="400-0987-1234", revenue=1000000, expense=e1.id)
-    c2 = Charity(charity_id="c000002", password="c000002", category="环境保护", name="关爱保护协会", address="广州增城区xxxx", city="广州",
+    c2 = Charity(charity_id="c000002", password="c000002", category="环境保护", name="保护环境协会", address="广州增城区xxxx", city="广州",
                  state="广东", telephone="400-5678-1234", revenue=500000, expense=e2.id)
     c3 = Charity(charity_id="c000003", password="c000003", category="儿童保护", name="关爱儿童协会", address="东莞中唐镇xxxx", city="东莞",
                  state="广东", telephone="400-3678-1234", revenue=20000000, expense=e3.id)
@@ -273,9 +322,27 @@ if __name__ == '__main__':
     db.session.commit()
 
     curr_time = datetime.datetime.now()
-    log = Log(log_id=c1.charity_id, operation="注册", log_time=datetime.datetime.strftime(
+    g1 = Gift(gift_name="衣物", gift_donor=d1.donor_id, gift_charity=c3.charity_id, date=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'), amount=5)
+    g2 = Gift(gift_name="狗狗小屋", gift_donor=d2.donor_id, gift_charity=c1.charity_id, date=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'), amount=1)
+    g3 = Gift(gift_name="现金", gift_donor=d2.donor_id, gift_charity=c2.charity_id, date=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'), amount=500)
+    db.session.add_all([g1, g2, g3])
+    db.session.commit()
+
+    curr_time = datetime.datetime.now()
+    log1 = Log(log_id=c1.charity_id, operation="注册", log_time=datetime.datetime.strftime(
         curr_time, '%Y-%m-%d %H:%M:%S'))
-    db.session.add(log)
+    log2 = Log(log_id=c2.charity_id, operation="注册", log_time=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'))
+    log3 = Log(log_id=c3.charity_id, operation="注册", log_time=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'))
+    log4 = Log(log_id=d1.donor_id, operation="注册", log_time=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'))
+    log5 = Log(log_id=d2.donor_id, operation="注册", log_time=datetime.datetime.strftime(
+        curr_time, '%Y-%m-%d %H:%M:%S'))
+    db.session.add_all([log1, log2, log3, log4, log5])
     db.session.commit()
 
     # db.drop_all()
