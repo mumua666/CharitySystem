@@ -236,7 +236,7 @@ def signUpCharity():
 def homePage():
     donors = Donor.query.all()
     charities = Charity.query.order_by(desc(Charity.revenue))
-    gifts = Gift.query.all()
+    gifts = Gift.query.order_by(desc(Gift.amount))
     logID = Log.query.order_by(desc(Log.log_time)).first()
     donor = Donor.query.filter_by(donor_id=logID.log_id).first()
     charity = Charity.query.filter_by(charity_id=logID.log_id).first()
@@ -252,9 +252,9 @@ def homePage():
 
         changeInfo = request.form.get('changeInfo')
         deleteItem = request.form.get('deleteItem')
-        CPE = request.form.get('CPE')
-        DRC = request.form.get('DRC')
-        MG = request.form.get('MG')
+        CPE = request.form.get('charity')
+        DRC = request.form.get('donor')
+        MG = request.form.get('gift')
         if CPE:
             displayCharity = not displayCharity
         if DRC:
