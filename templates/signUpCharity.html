@@ -34,7 +34,7 @@
 
         #signUp input {
             height: 40px;
-            width: 75%;
+            /* width: 75%; */
             margin: 0 auto;
             font-size: 20px;
             letter-spacing: 3px;
@@ -82,8 +82,11 @@
                 <span class="special">确认密码: &nbsp</span><input type="password" name="password2"><br> <br>
                 <span class="special">机构名称: &nbsp</span><input type="text" name="name"><br><br>
                 <span class="prompt">类别:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="category"><br><br>
-                <span class="prompt">电话:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="telphone"
-                    value="11位数字"><br><br>
+                <span class="prompt">电话:</span> &nbsp &nbsp &nbsp &nbsp
+                <input type="text" name="telphone1" value="3位数字" size="2">
+                <input type="text" name="telphone2" value="4位数字" size="4">
+                <input type="text" name="telphone3" value="4位数字" size="4">
+                <br><br>
                 <span class="prompt">省份:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="state"><br><br>
                 <span class="prompt">城市:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="city"><br><br>
                 <span class="prompt">街道:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="street"><br><br>
@@ -93,7 +96,7 @@
                 <span class="special">决算开销: &nbsp</span><input type="text" name="fundraising"><br><br>
                 <br>
                 &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                <input type="submit" value="注册"><br>
+                <input type="submit" value="注册" style="width:75%"><br>
                 {% for message in get_flashed_messages() %}
                 &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                 &nbsp &nbsp &nbsp

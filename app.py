@@ -28,31 +28,43 @@ class Expense(db.Model):
     fundraising = db.Column(db.Integer, unique=False)
 
 
+class Category(db.Model):
+    # 定义表名
+    __tablename__ = 'category'
+    # 定义列对象
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    category_id = db.Column(db.Integer, unique=True)
+    category_name = db.Column(db.String(255), unique=True)
+
+
 class Charity(db.Model):
     # 定义表名
     __tablename__ = 'charity'
     # 定义列对象
-    # id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    charity_id = db.Column(db.String(32), primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    charity_id = db.Column(db.String(32), unique=True)
     password = db.Column(db.String(32), unique=False)
-    category = db.Column(db.String(32), unique=False)
+    category_id = db.Column(db.Integer, unique=False)
     name = db.Column(db.String(32), unique=True)
     address = db.Column(db.String(32), unique=True)
     city = db.Column(db.String(32), unique=False)
     state = db.Column(db.String(32), unique=False, nullable=True)
     telephone = db.Column(db.String(32), unique=True)
     revenue = db.Column(db.Integer, unique=False)
-    expense = db.Column(db.Integer, db.ForeignKey(
+    expense_id = db.Column(db.Integer, db.ForeignKey(
         'expense.id'), unique=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(
+        'category.category_id'), unique=False)
     expenses = db.relationship('Expense', backref='charity')
+    category = db.relationship('Category', backref='charity')
 
 
 class Donor(db.Model):
     # 定义表名
     __tablename__ = 'donor'
     # 定义列对象
-    # id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    donor_id = db.Column(db.String(32), primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    donor_id = db.Column(db.String(32),  unique=True)
     password = db.Column(db.String(32), unique=False)
     last_name = db.Column(db.String(32), unique=False)
     first_name = db.Column(db.String(32), unique=False)
@@ -75,6 +87,7 @@ class Gift(db.Model):
         'charity.charity_id'), unique=False)
     date = db.Column(db.String(32), unique=False)
     amount = db.Column(db.Integer, unique=False)
+    category = db.Column(db.String(32), unique=False)
     gift_donors = db.relationship('Donor', backref='gift')
     gift_charities = db.relationship('Charity', backref='gift')
 
@@ -113,8 +126,8 @@ def index():
             flash("密码错误!!!")
         else:
             curr_time = datetime.datetime.now()
-            log = Log(log_id=account, operation_name="登录", log_time=datetime.datetime.strftime(
-                curr_time, '%Y-%m-%d %H:%M:%S'))
+            log = Log(log_id=account, operation_name="登录",
+                      log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             return redirect(url_for('homePage'))
@@ -163,8 +176,8 @@ def signUpDonor():
             db.session.commit()
 
             curr_time = datetime.datetime.now()
-            log = Log(log_id=account, operation_table='donor', operation_name="添加", operation_tuple=account, log_time=datetime.datetime.strftime(
-                curr_time, '%Y-%m-%d %H:%M:%S'))
+            log = Log(log_id=account, operation_table='donor', operation_name="添加", operation_tuple=account,
+                      log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
 
@@ -181,7 +194,10 @@ def signUpCharity():
         password2 = request.form.get('password2')
         name = request.form.get('name')
         category = request.form.get('category')
-        telphone = request.form.get('telphone')
+        telphone1 = request.form.get('telphone1')
+        telphone2 = request.form.get('telphone2')
+        telphone3 = request.form.get('telphone3')
+        telphone = telphone1+'-'+telphone2+'-'+telphone3
         state = request.form.get('state')
         city = request.form.get('city')
         street = request.form.get('street')
@@ -192,7 +208,9 @@ def signUpCharity():
         _name = Charity.query.filter_by(name=name).first()
         id = Charity.query.filter_by(charity_id=account).first()
         _telphone = Charity.query.filter_by(telephone=telphone).first()
-        if not all([account, password, password2, name, category, telphone, state, city, street, revenue, program, admin, fundraising]):
+        _category = Category.query.filter_by(category_name=category).first()
+        if not all([account, password, password2, name, category, [telphone1, telphone2, telphone3], state,
+                    city, street, revenue, program, admin, fundraising]):
             flash('填入信息不完整!!!')
         elif password != password2:
             flash('两次输入密码不一致！！！')
@@ -202,7 +220,7 @@ def signUpCharity():
             flash('机构名称已被注册!!!')
         elif len(account) != 7:
             flash('账号长度必须为7位!!!')
-        elif len(telphone) != 11:
+        elif len(telphone) != 13:
             flash('电话号码必须是11位数字!!!')
         elif _telphone:
             flash('电话号码已被注册使用!!!')
@@ -212,20 +230,29 @@ def signUpCharity():
                                   fundraising=fundraising)
                 db.session.add(expense)
                 db.session.commit()
-            except:
+            except Exception as e:
+                print(e)
                 flash("开销项填入数据错误！！！")
+                db.session.rollback()
 
             try:
-                charity = Charity(charity_id=account, password=password2, category=category, name=name, address=street, city=city,
-                                  state=state, telephone=telphone, revenue=revenue, expense=expense.id)
-                db.session.add(charity)
-                db.session.commit()
-            except:
+                if not _category:
+                    _category = Category(category_id=10+Category.query.order_by(desc(Category.id)).first().id,
+                                         category_name=category)
+            except Exception as e:
+                print(e)
                 flash("填入数据错误！！！")
+                db.session.rollback()
+
+            charity = Charity(charity_id=account, password=password2, category_id=_category.category_id,
+                              name=name, address=street, city=city, state=state, telephone=telphone,
+                              revenue=revenue, expense_id=expense.id)
+            db.session.add(charity)
+            db.session.commit()
 
             curr_time = datetime.datetime.now()
-            log = Log(log_id=account, operation_table='charity', operation_name="添加", operation_tuple=account, log_time=datetime.datetime.strftime(
-                curr_time, '%Y-%m-%d %H:%M:%S'))
+            log = Log(log_id=account, operation_table='charity', operation_name="添加", operation_tuple=account,
+                      log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
 
@@ -246,6 +273,20 @@ def homePage():
     displayCharity = False
     displayDonor = False
     displayGift = False
+    categoryName_Charity = []
+    categoryName = ''
+    displayCategory = False
+    gift = ''
+    giftDonate = ''
+    displayGiver = False
+    Giver = []
+    charityName = ''
+    checkCharity = ''
+    displayCheckDonor = False
+    checkDonor = []
+    donorName = ''
+    realname = ''
+    anonymous = ''
     if donor:
         logName = donor.last_name+donor.first_name
     elif charity:
@@ -254,9 +295,95 @@ def homePage():
 
         changeInfo = request.form.get('changeInfo')
         deleteItem = request.form.get('deleteItem')
+        logout = request.form.get('logout')
         CPE = request.form.get('charity')
         DRC = request.form.get('donor')
         MG = request.form.get('gift')
+        categoryName = request.form.get('categoryName')
+        category = Category.query.filter_by(
+            category_name=categoryName).first()
+        charityName = request.form.get('charityName')
+        checkCharity = Charity.query.filter_by(name=charityName).first()
+        last_name = request.form.get('donorName1')
+        first_name = request.form.get('donorName2')
+        charityID = request.form.get('charityID')
+        donorID = request.form.get('donorID')
+        donateType = request.form.get('donateType')
+        donateAmount = request.form.get('donateAmount')
+        realname = request.form.get('realname')
+        anonymous = request.form.get('anonymous')
+        if all([last_name, first_name]):
+            donorName = last_name+first_name
+        if logout:
+            return redirect(url_for('index'))
+        '''
+        此处存在问题,无法获取到input输入的内容,待修复!
+        '''
+        if donorID:
+            print('==============================================')
+            print(donorID)
+            if not Donor.query.filter_by(donor_id=donorID).first():
+                flash("只有注册为捐赠者才可以进行捐赠哦！")
+            elif Charity.query.filter_by(charity_id=charityID).first():
+                flash("该慈善机构ID并不存在!")
+            else:
+                curr_time = datetime.datetime.now()
+                if realname:
+                    giftDonate = Gift(gift_name=donateType, gift_donor=donorID, gift_charity=charityID,
+                                      category=Charity.query.filter_by(
+                                          charity_id=charityID).first().category.category_name,
+                                      data=datetime.datetime.strftime(
+                                          curr_time, '%Y-%m-%d %H:%M:%S'),
+                                      amount=donateAmount)
+                elif anonymous:
+                    giftDonate = Gift(gift_name=donateType, gift_donor=donorID, gift_charity=charityID,
+                                      category=Charity.query.filter_by(
+                                          charity_id=charityID).first().category.category_name,
+                                      data=datetime.datetime.strftime(
+                                          curr_time, '%Y-%m-%d %H:%M:%S'),
+                                      amount=donateAmount)
+                db.session.add(giftDonate)
+                db.session.commit()
+
+        if categoryName:
+            if categoryName == "请输入类别名":
+                if categoryName == "请输入类别名" and not donorName:
+                    flash("请在输入框中填入信息!!!")
+            else:
+                if category:
+                    categoryName_Charity = Charity.query.filter_by(
+                        category_id=category.category_id)
+                    gift = Gift.query.filter_by(
+                        category=categoryName).all()
+                    displayCategory = True
+                else:
+                    flash("当前尚无"+categoryName+"类别慈善机构!!!")
+
+        if charityName and categoryName == "请输入类别名" and not donorName:
+            if checkCharity:
+                Giver = Gift.query.filter(
+                    Gift.gift_charities.has(name=charityName)).all()
+                displayGiver = True
+            else:
+                flash("当前尚无名为"+charityName+"的慈善机构!!!")
+
+        if donorName and categoryName == "请输入类别名" and charityName == "请输入机构名":
+            if not all([last_name, first_name]):
+                flash("请填入完整姓氏和姓名!!!")
+            else:
+                if donorName == "捐赠姓氏捐赠名字":
+                    flash("请在输入框中填入信息!!!")
+                else:
+                    aimedDonor = Donor.query.filter_by(
+                        last_name=last_name, first_name=first_name).first()
+                    if aimedDonor:
+                        checkDonor = Gift.query.filter_by(
+                            gift_donor=aimedDonor.donor_id).all()
+                    if checkDonor:
+                        displayCheckDonor = True
+                    else:
+                        flash("当前尚无名为"+donorName+"的捐赠者!!!")
+
         if CPE:
             displayCharity = not displayCharity
         if DRC:
@@ -268,12 +395,14 @@ def homePage():
             log = ''
             if donor:
                 db.session.delete(donor)
-                log = Log(log_id=logID.log_id,  operation_table='donor', operation_name="修改", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
-                    curr_time, '%Y-%m-%d %H:%M:%S'))
+                log = Log(log_id=logID.log_id,  operation_table='donor',
+                          operation_name="修改", operation_tuple=logID.log_id,
+                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             elif charity:
                 db.session.delete(charity)
-                log = Log(log_id=logID.log_id,  operation_table='charity', operation_name="修改", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
-                    curr_time, '%Y-%m-%d %H:%M:%S'))
+                log = Log(log_id=logID.log_id,  operation_table='charity',
+                          operation_name="修改", operation_tuple=logID.log_id,
+                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             if donor:
@@ -285,18 +414,26 @@ def homePage():
             log = ''
             if donor:
                 db.session.delete(donor)
-                log = Log(log_id=logID.log_id,  operation_table='donor', operation_name="删除", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
-                    curr_time, '%Y-%m-%d %H:%M:%S'))
+                log = Log(log_id=logID.log_id,  operation_table='donor',
+                          operation_name="删除", operation_tuple=logID.log_id,
+                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             elif charity:
                 db.session.delete(charity)
-                log = Log(log_id=logID.log_id,  operation_table='charity', operation_name="删除", operation_tuple=logID.log_id, log_time=datetime.datetime.strftime(
-                    curr_time, '%Y-%m-%d %H:%M:%S'))
+                log = Log(log_id=logID.log_id,  operation_table='charity',
+                          operation_name="删除", operation_tuple=logID.log_id,
+                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             return redirect(url_for('index'))
 
-    return render_template('homePage.html', donors=donors, charities=charities, gifts=gifts, logID=logID.log_id, logName=logName,
-                           displayCharity=displayCharity, displayDonor=displayDonor, displayGift=displayGift)
+    return render_template('homePage.html',  logID=logID, logName=logName,
+                           donors=donors, charities=charities, gifts=gifts,
+                           displayCharity=displayCharity, displayDonor=displayDonor, displayGift=displayGift,
+                           categoryName=categoryName, categoryName_Charity=categoryName_Charity, displayCategory=displayCategory,
+                           gifted_donors=gift,
+                           displayGiver=displayGiver, Giver=Giver, checkCharity=checkCharity,
+                           displayCheckDonor=displayCheckDonor, donorName=donorName, checkDonor=checkDonor,
+                           giftDonate=giftDonate, realname=realname, anonymous=anonymous)
 
 
 if __name__ == '__main__':
@@ -309,12 +446,18 @@ if __name__ == '__main__':
     db.session.add_all([e1, e2, e3])
     db.session.commit()
 
-    c1 = Charity(charity_id="c000001", password="c000001", category="动物保护", name="关爱动物中心", address="深圳南山区xxxx", city="深圳",
-                 state="广东", telephone="400-0987-1234", revenue=1000000, expense=e1.id)
-    c2 = Charity(charity_id="c000002", password="c000002", category="环境保护", name="保护环境协会", address="广州增城区xxxx", city="广州",
-                 state="广东", telephone="400-5678-1234", revenue=500000, expense=e2.id)
-    c3 = Charity(charity_id="c000003", password="c000003", category="儿童保护", name="关爱儿童协会", address="东莞中唐镇xxxx", city="东莞",
-                 state="广东", telephone="400-3678-1234", revenue=20000000, expense=e3.id)
+    category1 = Category(category_id=11, category_name="动物保护")
+    category2 = Category(category_id=12, category_name="环境保护")
+    category3 = Category(category_id=13, category_name="儿童保护")
+    db.session.add_all([category1, category2, category3])
+    db.session.commit()
+
+    c1 = Charity(charity_id="c000001", password="c000001", category_id=category1.category_id, name="关爱动物中心", address="深圳南山区xxxx",
+                 city="深圳", state="广东", telephone="400-0987-1234", revenue=1000000, expense_id=e1.id)
+    c2 = Charity(charity_id="c000002", password="c000002", category_id=category2.category_id, name="保护环境协会", address="广州增城区xxxx",
+                 city="广州", state="广东", telephone="400-5678-1234", revenue=500000, expense_id=e2.id)
+    c3 = Charity(charity_id="c000003", password="c000003", category_id=category3.category_id, name="关爱儿童协会", address="东莞中唐镇xxxx",
+                 city="东莞", state="广东", telephone="400-3678-1234", revenue=20000000, expense_id=e3.id)
     db.session.add_all([c1, c2, c3])
     db.session.commit()
 
@@ -326,12 +469,16 @@ if __name__ == '__main__':
     db.session.commit()
 
     curr_time = datetime.datetime.now()
-    g1 = Gift(gift_name="衣物", gift_donor=d1.donor_id, gift_charity=c3.charity_id, date=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'), amount=5)
-    g2 = Gift(gift_name="狗狗小屋", gift_donor=d2.donor_id, gift_charity=c1.charity_id, date=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'), amount=1)
-    g3 = Gift(gift_name="现金", gift_donor=d2.donor_id, gift_charity=c2.charity_id, date=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'), amount=500)
+    g1 = Gift(gift_name="现金", gift_donor=d1.donor_id, gift_charity=c3.charity_id,
+              category=c3.category.category_name, date=datetime.datetime.strftime(
+                  curr_time, '%Y-%m-%d %H:%M:%S'),
+              amount=150)
+    g2 = Gift(gift_name="现金", gift_donor=d2.donor_id, gift_charity=c1.charity_id,
+              category=c1.category.category_name, date=datetime.datetime.strftime(
+                  curr_time, '%Y-%m-%d %H:%M:%S'), amount=1000)
+    g3 = Gift(gift_name="现金", gift_donor=d2.donor_id, gift_charity=c2.charity_id,
+              category=c2.category.category_name, date=datetime.datetime.strftime(
+                  curr_time, '%Y-%m-%d %H:%M:%S'), amount=500)
     db.session.add_all([g1, g2, g3])
     db.session.commit()
 
@@ -348,6 +495,5 @@ if __name__ == '__main__':
         curr_time, '%Y-%m-%d %H:%M:%S'))
     db.session.add_all([log1, log2, log3, log4, log5])
     db.session.commit()
-
-    # db.drop_all()
+    # db.drop_all()   #用于演示时清空数据库表内容
     app.run(debug=True)
