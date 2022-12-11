@@ -359,7 +359,7 @@ def homePage():
                 else:
                     flash("当前尚无"+categoryName+"类别慈善机构!!!")
 
-        if charityName and categoryName == "请输入类别名" and not donorName:
+        if charityName and categoryName == "请输入类别名":
             if checkCharity:
                 Giver = Gift.query.filter(
                     Gift.gift_charities.has(name=charityName)).all()
