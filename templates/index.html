@@ -1,96 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>大爱无疆慈善中心登录页</title>
     <style>
-        #main {
-            position: relative;
-            height: 900px;
-            width: 100%;
-            background-image: url('../static/background04.jpeg');
-            background-size: 100% auto;
-            text-align: center;
-        }
+      /* * {
+        margin: 0;
+        padding: 0;
+      } */
+      body {
+        width: 1550px;
+        min-width: 1200px;
+      }
 
-        #logIn {
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            text-align: center;
-            margin: 0 auto;
-            transform: translateX(-50%);
-            display: inline-block;
-        }
+      #logogroup {
+        display: inline-block;
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+      }
 
-        #logIn p {
-            font-size: 26px;
-            color: red;
-            font-weight: 700;
-        }
+      #logo1 a {
+        padding-left: 80px;
+      }
 
-        #logIn input {
-            display: block;
-            height: 50px;
-            width: 100%;
-            margin: 0 auto;
-            font-size: 20px;
-            letter-spacing: 3px;
-            box-sizing: border-box;
-            text-align: center;
-            outline: none;
-            color: red;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 192, 203, 0.498);
-        }
+      #main {
+        /* position: relative;
+        height: 600px;
+        width: 100%;
+        background-image: url("../static/66.png");
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-attachment: fixed; */
+        background-color: #fafbfc;
+        width: 100%;
+        display: inline-block;
+      }
 
+      #left {
+        float: left;
+        padding-left: 150px;
+        padding-top: 60px;
+        height: 480px;
+        width: 480px;
+      }
 
-        #logIn a {
-            font-size: 20px;
-            text-decoration: none;
-        }
+      #right {
+        float: left;
+        height: 550px;
+        width: 550px;
+        padding-top: 60px;
+        padding-left: 200px;
+      }
 
-        #logIn a:visited {
-            color: rgba(128, 128, 128, 0.5);
-        }
+      table {
+        border: 1px;
+        background-color: #fff;
+        width: 550px;
+        height: 550px;
+      }
 
-        #logIn a:hover {
-            color: blue;
-        }
+      th {
+        color: rgb(35, 112, 234);
+        font-size: 23px;
+        text-align: center;
+      }
 
-        #logIn a:active {
-            color: red;
-        }
+      input {
+        display: block;
+        width: 450px;
+        outline: none;
+        background: #fafbfc;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        border: 2px solid #edebeb;
+        color: #333;
+        margin: 0 auto;
+        border-radius: 5px;
+      }
 
-        span {
-            font-size: 20px;
-            color: white;
-            font-weight: 700;
-        }
+      #red {
+        background-color: red;
+        color: white;
+        line-height: 40px;
+      }
+
+      /* #main1 {
+        position: relative;
+        height: 900px;
+        width: 100%;
+        background-image: url("../static/6.png");
+        background-size: 100% auto;
+        text-align: center;
+      } */
+
+      /* #logIn {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translateX(-50%);
+        display: inline-block;
+      }
+
+      #logIn p {
+        font-size: 26px;
+        color: red;
+        font-weight: 700;
+      }
+
+      #logIn input {
+        display: block;
+        height: 50px;
+        width: 100%;
+        margin: 0 auto;
+        font-size: 20px;
+        letter-spacing: 3px;
+        box-sizing: border-box;
+        text-align: center;
+        outline: none;
+        color: red;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 192, 203, 0.498);
+      }
+
+      #logIn a {
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      #logIn a:visited {
+        color: rgba(128, 128, 128, 0.5);
+      }
+
+      #logIn a:hover {
+        color: blue;
+      }
+
+      #logIn a:active {
+        color: red;
+      }
+
+      span {
+        font-size: 20px;
+        color: white;
+        font-weight: 700;
+      } */
     </style>
-</head>
+  </head>
 
-<body>
-    <div id="main">
-        <div id="logIn">
-            <img src="../static/logo01.png" alt="登录业Logo">
-            <p>赠人玫瑰，手有余香</p>
-            <form method="post">
-                <input type="account" name="account" value="请输入账号"><br>
-                <input type="password" name="password" value="请输入用户名"><br>
-                <br><br><br>
-                <input type="submit" value="登录"><br>
-                <p><a href="./signUp.html">没有账号？点我注册</a></p>
-                {% for message in get_flashed_messages() %}
-                <span> {{ message }}</span>
-                {% endfor %}
-            </form>
-        </div>
+  <body>
+    <div id="logogroup">
+      <span id="logo1">
+        <a href="#"> <img src="../static/44.png" alt="" /></a>
+      </span>
     </div>
-</body>
+    <div id="main">
+      <div id="left">
+        <img
+          src="../static/imga.png"
+          alt="加载失败"
+          height="480px"
+          width="480px"
+        />
+      </div>
+      <div id="right">
+        <form method="post">
+          <table border="0">
+            <tr>
+              <th>用户登录</th>
+            </tr>
+            <tr>
+              <td>
+                <input type="account" name="account" value="请输入账号" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="password"
+                  name="password"
+                  value="请输入用户名"
+                /><br />
+              </td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="登录" id="red" /></td>
+            </tr>
+            <tr>
+              <td>
+                <p><a href="./signUp.html">没有账号？点我注册</a></p>
+              </td>
+            </tr>
 
+            {% for message in get_flashed_messages() %}
+            <td><span> {{ message }}</span></td>
+            {% endfor %}
+          </table>
+        </form>
+      </div>
+    </div>
+
+    <!-- <div id="main1">
+      <div id="logIn">
+        <img src="../static/logo01.png" alt="登录业Logo" />
+        <p>赠人玫瑰，手有余香</p>
+        <form method="post">
+          <input type="account" name="account" value="请输入账号" /><br />
+          <input type="password" name="password" value="请输入用户名" /><br />
+          <br /><br /><br />
+          <input type="submit" value="登录" /><br />
+          <p><a href="./signUp.html">没有账号？点我注册</a></p>
+          {% for message in get_flashed_messages() %}
+          <span> {{ message }}</span>
+          {% endfor %}
+        </form>
+      </div> -->
+    <!-- </div> -->
+  </body>
 </html>
