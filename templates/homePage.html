@@ -41,7 +41,7 @@
 
         #nav li,
         #menu li {
-            margin: 0 80px;
+            margin: 0 40px;
         }
 
         .input,
@@ -131,10 +131,36 @@
             font-weight: 700;
         }
 
+        .donate {
+            height: 30px;
+            width: 200px;
+            background-color: aquamarine;
+            color: red;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .donateButton {
+            height: 40px;
+            width: 100px;
+            margin: 5px 0;
+            background-color: rgba(220, 226, 41, 0.49);
+            color: rgb(0, 255, 89);
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 15px;
+        }
+
         #footer {
-            height: 100px;
+            height: 150px;
             font-size: 20px;
             color: white;
+        }
+
+        #footer span {
+            font-size: 20px;
+            color: lightgreen;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -144,12 +170,13 @@
         <div id="head">
             <h1>欢迎登录大爱无疆慈善中心</h1>
             <ul id="nav">
-                <li>登录账号: <span>{{logID}}</span></li>
+                <li>登录账号: <span>{{logID.log_id}}</span></li>
                 <li>登录名称: <span>{{logName}}</span></li>
             </ul>
         </div>
         <form method="post">
             <ul id="menu">
+                <li><input type="submit" value="退出登录" class="input" name="logout"></li>
                 <li><input type="submit" value="修改信息" class="input" name="changeInfo"></li>
                 <li><input type="submit" value="注销账户" class="input" name="deleteItem"></li>
             </ul>
@@ -185,7 +212,10 @@
                     <button type="submit">查询</button>
                 </li>
                 <li>
-                    <input type="text" size="10" value="请输入捐赠名" name="donorName" class="complexQuery">
+                    <input type="text" size="10" value="捐赠姓氏" name="donorName1" class="complexQuery"
+                        style="width:195px">
+                    <input type="text" size="10" value="捐赠名字" name="donorName2" class="complexQuery"
+                        style="width:195px">
                     <button type="submit">查询</button>
                 </li>
             </ul>
@@ -209,7 +239,7 @@
             <tr>
                 <td>{{ charity.charity_id }}</td>
                 <td>{{ charity.name }}</td>
-                <td>{{ charity.category }}</td>
+                <td>{{ charity.category.category_name }}</td>
                 <td>{{ charity.telephone }}</td>
                 <td>{{ charity.state }}</td>
                 <td>{{ charity.city }}</td>
@@ -222,6 +252,7 @@
         <h2>当前尚无慈善机构注册</h2>
         {% endif %}
         {% endif %}
+
         {% if displayDonor %}
         {% if donors %}
         <h2>捐赠者列表</h2>
@@ -253,6 +284,7 @@
         <h2>当前尚无捐赠者注册</h2>
         {% endif %}
         {% endif %}
+
         {% if displayGift %}
         {% if gifts%}
         <h2>捐赠物列表</h2>
@@ -286,7 +318,197 @@
         <h2>当前尚未收到任何捐赠</h2>
         {% endif %}
         {% endif %}
+
+        {% if displayCategory %}
+        {% if categoryName_Charity %}
+        <h2>{{categoryName}}类别慈善机构列表</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>类别</th>
+                <th>电话</th>
+                <th>省份</th>
+                <th>城市</th>
+                <th>街道</th>
+                <th>年度决算</th>
+            </tr>
+            {% for charity in categoryName_Charity %}
+            <tr>
+                <td>{{ charity.charity_id }}</td>
+                <td>{{ charity.name }}</td>
+                <td>{{ charity.category.category_name }}</td>
+                <td>{{ charity.telephone }}</td>
+                <td>{{ charity.state }}</td>
+                <td>{{ charity.city }}</td>
+                <td>{{ charity.address }}</td>
+                <td>{{ charity.revenue }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>当前尚无{{categoryName}}类别慈善机构</h2>
+        {% endif %}
+        {% if gifted_donors %}
+        <h2>{{categoryName}}类别的捐赠者</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>姓氏</th>
+                <th>名字</th>
+                <th>电话</th>
+                <th>省份</th>
+                <th>城市</th>
+                <th>街道</th>
+                <th>邮编</th>
+            </tr>
+            {% for gift in gifted_donors %}
+            <tr>
+                <td>{{ gift.gift_donors.donor_id }}</td>
+                <td>{{ gift.gift_donors.last_name }}</td>
+                <td>{{ gift.gift_donors.first_name }}</td>
+                <td>{{ gift.gift_donors.telephone }}</td>
+                <td>{{ gift.gift_donors.state }}</td>
+                <td>{{ gift.gift_donors.city }}</td>
+                <td>{{ gift.gift_donors.address }}</td>
+                <td>{{ gift.gift_donors.zip }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>当前尚无捐赠者注册</h2>
+        {% endif %}
+        {% endif %}
+
+
+        {% if displayGiver %}
+        {% if Giver %}
+        <h2>{{checkCharity.name}}受捐赠列表</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>捐赠者</th>
+                <th>捐赠日期</th>
+                <th>捐赠数量</th>
+            </tr>
+            {% for giver in Giver %}
+            <tr>
+                <td>{{ checkCharity.charity_id }}</td>
+                <td>{{ checkCharity.name}}</td>
+                {%if giver.gift_donors %}
+                <td>{{ giver.gift_donors.last_name+giver.gift_donors.first_name }}</td>
+                {% else %}
+                <td>匿名者</td>
+                {% endif %}
+                <td>{{ giver.date }}</td>
+                <td>{{ giver.amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>当前尚未收到任何捐赠</h2>
+        {% endif %}
+        {% endif %}
+
+        {% if displayCheckDonor %}
+        {% if checkDonor %}
+        <h2>{{donorName}}捐赠列表</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>ID</th>
+                <th>捐赠者</th>
+                <th>受赠机构</th>
+                <th>受赠机构类别</th>
+                <th>捐赠日期</th>
+                <th>捐赠数量</th>
+            </tr>
+            {% for gift in checkDonor %}
+            <tr>
+                <td>{{ gift.gift_donors.donor_id }}</td>
+                <td>{{donorName}}</td>
+                {%if gift.gift_charities %}
+                <td>{{ gift.gift_charities.name }}</td>
+                {% else %}
+                <td>已注销</td>
+                {% endif %}
+                {%if gift.gift_charities %}
+                <td>{{ gift.gift_charities.category.category_name }}</td>
+                {% else %}
+                <td>已注销</td>
+                {% endif %}
+                <td>{{ gift.date }}</td>
+                <td>{{ gift.amount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <h2>尚未查到{{donorName}}的捐赠记录</h2>
+        {% endif %}
+        {% endif %}
+
+        <h2>快捷捐赠</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>受赠机构ID</th>
+                <th>捐赠者ID</th>
+                <th>捐赠物类别</th>
+                <th>捐赠数量</th>
+                <th>捐赠选项</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="charityID" class="donate">
+                </td>
+                <td>
+                    <input type="text" name="donorID" class="donate">
+                </td>
+                <td>
+                    <input type="text" name="donateType" class="donate">
+                </td>
+                <td>
+                    <input type="text" name="donateAmount" class="donate">
+                </td>
+                <td>
+                    <form method="post">
+                        <input type="submit" name="realname" value="实名捐赠" class="donateButton">
+                        <input type="submit" name="anonymous" value="匿名捐赠" class="donateButton">
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <hr>
+
+        {% if giftDonate %}
+        <h2>捐赠成功</h2>
+        <table cellspacing="0" cellpadding="10">
+            <tr>
+                <th>受赠机构ID</th>
+                <th>捐赠者ID</th>
+                <th>捐赠物类别</th>
+                <th>捐赠数量</th>
+                <th>捐赠选项</th>
+            </tr>
+
+            <tr>
+                <td>giftDonate.gift_charity</td>
+                <td>giftDonate.gift_donor</td>
+                <td>giftDonate.gift_name</td>
+                <td>giftDonate.amount</td>
+                {% if realname %}
+                <td>实名捐赠</td>
+                {% elif anonymous %}
+                <td>匿名捐赠</td>
+                {% endif %}
+            </tr>
+        </table>
+        <hr>
+        {% endif %}
+
         <div id="footer">
+            {% for message in get_flashed_messages() %}
+            <span> {{ message }}</span>
+            {% endfor %}
             <p>CharitySystem Powered By Flask</p>
             <p>Copyright &copy 2022 All Rights Reserved</p>
         </div>
