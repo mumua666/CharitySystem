@@ -83,6 +83,15 @@
       color: gray;
     }
 
+    #inform {
+      font-size: 26px;
+      font-weight: 700;
+      color: pink;
+      letter-spacing: 3px;
+      position: relative;
+      left: 30%;
+    }
+
     #jump {
       position: relative;
       left: 40%;
@@ -147,7 +156,7 @@
           </tr>
 
           {% for message in get_flashed_messages() %}
-          <td><span> {{ message }}</span></td>
+          <td id="inform"><span> {{ message }}</span></td>
           {% endfor %}
         </table>
       </form>
