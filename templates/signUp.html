@@ -1,211 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
 
-      body {
-        width: 1580px;
-        min-width: 1200px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-      #logogroup {
-        display: inline-block;
-        width: 100%;
-        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
-      }
+    body {
+      width: 1580px;
+      min-width: 1200px;
+    }
 
-      #logo1 a {
-        padding-left: 80px;
-      }
+    #logogroup {
+      display: inline-block;
+      width: 100%;
+      box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+    }
 
-      #main {
-        background-color: #fafbfc;
-        width: 100%;
-        display: inline-block;
-      }
+    #logo1 a {
+      padding-left: 80px;
+    }
 
-      #left {
-        float: left;
-        padding-left: 150px;
-        padding-top: 60px;
-        height: 480px;
-        width: 480px;
-      }
+    #main {
+      background-color: #fafbfc;
+      width: 100%;
+      display: inline-block;
+    }
 
-      #right {
-        float: left;
-        height: 550px;
-        width: 550px;
-        padding-top: 60px;
-        padding-left: 200px;
-      }
+    #left {
+      float: left;
+      padding-left: 150px;
+      padding-top: 60px;
+      height: 480px;
+      width: 480px;
+    }
 
-      table {
-        text-align: center;
-        border: 1px;
-        background-color: #fff;
-        width: 550px;
-        height: 520px;
-      }
+    #right {
+      float: left;
+      height: 550px;
+      width: 550px;
+      padding-top: 60px;
+      padding-left: 200px;
+    }
 
-      th {
-        color: #42464a;
-        font-size: 23px;
-        text-align: center;
-      }
+    table {
+      text-align: center;
+      border: 1px;
+      background-color: #fff;
+      width: 550px;
+      height: 520px;
+    }
 
-      button {
-        height: 70px;
-        width: 85%;
-        font-size: 20px;
-        font-weight: 600;
-        letter-spacing: 3px;
-        box-sizing: border-box;
-        text-align: left;
-        border: none;
-        background-color: #fdebeb;
-      }
+    th {
+      color: #42464a;
+      font-size: 23px;
+      text-align: center;
+    }
 
-      #red {
-        background-color: red;
-        color: white;
-        font-weight: bold;
-        line-height: 40px;
-      }
+    button {
+      height: 70px;
+      width: 85%;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      box-sizing: border-box;
+      text-align: left;
+      border: none;
+      background-color: #fdebeb;
+    }
 
-      a {
-        position: relative;
-        top: -30%;
-        text-decoration: none;
-        padding-left: 10px;
-        color: red;
-      }
+    #red {
+      background-color: red;
+      color: white;
+      font-weight: bold;
+      line-height: 40px;
+    }
 
-      a:visited {
-        color: red;
-      }
-      #button1 {
-        position: relative;
-        top: -10%;
-      }
+    a {
+      position: relative;
+      top: -30%;
+      text-decoration: none;
+      padding-left: 10px;
+      color: red;
+    }
 
-      #button2 {
-        position: relative;
-        top: -25%;
-      }
+    a:visited {
+      color: red;
+    }
 
-      img {
-        padding-left: 10px;
-        padding-top: 2px;
-      }
-      /* #main {
-            position: relative;
-            height: 900px;
-            width: 100%;
-            background-image: url('../static/background05.jpg');
-            background-position-x: 20%;
-            text-align: center;
-        }
+    #button1 {
+      position: relative;
+      top: -10%;
+    }
 
-        #main button {
-            height: 80px;
-            width: 50%;
-            margin: 0 auto;
-            font-size: 40px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            box-sizing: border-box;
-            text-align: center;
-            outline: none;
-            color: yellow;
-            border: none;
-            border-radius: 10px;
-            background-color: rgba(255, 192, 203, 0.49);
-        }
+    #button2 {
+      position: relative;
+      top: -25%;
+    }
 
+    img {
+      padding-left: 10px;
+      padding-top: 2px;
+    }
+  </style>
+</head>
 
-
-        #main a {
-            text-decoration: none;
-            color: pink;
-        }
-
-        /* 
-        #main a:visited {
-            color: rgba(128, 128, 128, 0.5);
-        } */
-
-      /* #main a:hover {
-            color: blue;
-        }
-
-        #main a:active {
-            color: red;
-        } */
-    </style>
-  </head>
-
-  <body>
-    <div id="logogroup">
-      <span id="logo1">
-        <a href="#"> <img src="../static/44.png" alt="" /></a>
-      </span>
+<body>
+  <div id="logogroup">
+    <span id="logo1">
+      <a href="#"> <img src="../static/44.png" alt="" /></a>
+    </span>
+  </div>
+  <div id="main">
+    <div id="left">
+      <img src="../static/imga.png" alt="加载失败" height="480px" width="480px" />
     </div>
-    <div id="main">
-      <div id="left">
-        <img
-          src="../static/imga.png"
-          alt="加载失败"
-          height="480px"
-          width="480px"
-        />
-      </div>
-      <div id="right">
-        <form method="post">
-          <table
-            border="0"
-            style="border-collapse: separate; border-spacing: 10px"
-          >
-            <tr>
-              <th>请依照您的身份进行选择</th>
-            </tr>
-            <tr>
-              <td>
-                <button id="button1">
-                  <img
-                    src="../static/person.png"
-                    alt=""
-                    height="55px"
-                    width="55px"
-                  />
-                  <a href="signUpDonor.html">捐赠者</a>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button id="button2">
-                  <img
-                    src="../static/charity.png"
-                    alt=""
-                    height="55px"
-                    width="55px"
-                  />
-                  <a href="signUpCharity.html">慈善方</a>
-                </button>
-              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
+    <div id="right">
+      <form method="post">
+        <table border="0" style="border-collapse: separate; border-spacing: 10px">
+          <tr>
+            <th>请依照您的身份进行选择</th>
+          </tr>
+          <tr>
+            <td>
+              <button id="button1">
+                <img src="../static/person.png" alt="" height="55px" width="55px" />
+                <a href="signUpDonor.html">捐赠者</a>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button id="button2">
+                <img src="../static/charity.png" alt="" height="55px" width="55px" />
+                <a href="signUpCharity.html">慈善方</a>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
