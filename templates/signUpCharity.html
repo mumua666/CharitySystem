@@ -1,79 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>大爱无疆慈善中心注册页</title>
     <style>
-        #main {
-            position: relative;
-            height: 900px;
-            width: 100%;
-            background-image: url('../static/background05.jpg');
-            background-position-x: 20%;
-            text-align: center;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+      }
 
-        #signUp {
-            position: absolute;
-            top: 1%;
-            left: 50%;
-            text-align: center;
-            margin: 0 auto;
-            transform: translateX(-50%);
-            display: inline-block;
-        }
+      body {
+        width: 1580px;
+        min-width: 1200px;
+      }
 
-        #signUp p {
-            font-size: 26px;
-            color: red;
-            font-weight: 700;
-        }
+      #logogroup {
+        display: inline-block;
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+      }
 
-        #signUp input {
-            height: 40px;
-            /* width: 75%; */
-            margin: 0 auto;
-            font-size: 20px;
-            letter-spacing: 3px;
-            box-sizing: border-box;
-            text-align: center;
-            outline: none;
-            color: yellow;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 192, 203, 0.49);
-        }
+      #logo1 a {
+        padding-left: 80px;
+      }
 
-        #signUp .gray {
-            color: gray;
-            font-size: 20px;
-        }
+      #main {
+        background-color: #fafbfc;
+        width: 100%;
+        display: inline-block;
+      }
 
-        #signUp .prompt {
-            font-size: 20px;
-            letter-spacing: 3px;
-            color: pink;
-        }
+      #left {
+        float: left;
+        padding-left: 150px;
+        padding-top: 60px;
+        height: 480px;
+        width: 480px;
+      }
 
-        #signUp .special {
-            font-size: 20px;
-            color: pink;
-            letter-spacing: 0;
-        }
+      #right {
+        float: left;
+        height: 580px;
+        width: 550px;
+        padding-top: 30px;
+        padding-left: 200px;
+      }
 
-        span {
-            font-size: 20px;
-            color: white;
-            font-weight: 700;
-        }
+      table {
+        text-align: center;
+        border: 1px;
+        background-color: #fff;
+        width: 550px;
+        height: 530px;
+      }
+
+      th {
+        color: #42464a;
+        font-size: 23px;
+        text-align: center;
+      }
+
+      input {
+        display: block;
+        width: 85%;
+        outline: none;
+        background: #fafbfc;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        border: 2px solid #edebeb;
+        color: #333;
+        margin: 0 auto;
+        border-radius: 5px;
+      }
+
+      #register {
+        color: white;
+        background-color: red;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      #second1 {
+        width: 170px;
+        padding-left: 27px;
+      }
+
+      #second2 {
+        width: 60%;
+        padding-right: 15px;
+      }
+
+      #third1 {
+        padding-left: 27px;
+      }
+
+      #third3 {
+        padding-right: 30px;
+      }
+      #forth1 {
+        width: 18%;
+        padding-left: 27px;
+      }
+      #forth2 {
+        width: 16%;
+      }
+      #forth3 {
+        width: 20%;
+        padding-right: 30px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <div id="logogroup">
+      <span id="logo1">
+        <a href="#"> <img src="../static/44.png" alt="" /></a>
+      </span>
+    </div>
     <div id="main">
+      <div id="left">
+        <img
+          src="../static/imga.png"
+          alt="加载失败"
+          height="480px"
+          width="480px"
+        />
+      </div>
+
+      <div id="right">
+        <form method="post">
+          <table
+            border="0"
+            style="border-collapse: separate; border-spacing: 10px"
+          >
+            <tr>
+              <th>
+                <img
+                  src="../static/charity.png "
+                  alt=""
+                  width="45px"
+                  height="45px"
+                />
+                <span>&nbsp注册</span>
+              </th>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input type="text" name="account" placeholder="账号" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input type="password" name="password" placeholder=" 密码" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input
+                  type="password"
+                  name="password2"
+                  placeholder=" 确认密码"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td id="second1" colspan="1">
+                <input type="text" name="name" placeholder=" 机构名称" />
+              </td>
+              <td id="second2" colspan="2">
+                <input type="text" name="category" placeholder=" 类别" />
+              </td>
+            </tr>
+
+            <tr>
+              <td id="third1">
+                <input
+                  type="text"
+                  name="telphone1"
+                  placeholder=" 电话：3位数字"
+                  size="2"
+                />
+              </td>
+              <td id="third2">
+                <input
+                  type="text"
+                  name="telphone2"
+                  placeholder=" 4位数字"
+                  size="4"
+                />
+              </td>
+              <td id="third3">
+                <input
+                  type="text"
+                  name="telphone3"
+                  placeholder="4 位数字"
+                  size="4"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td id="third1">
+                <input type="text" name="state" placeholder=" 省份" size="3" />
+              </td>
+              <td id="third2">
+                <input type="text" name="city" placeholder=" 城市" size="3" />
+              </td>
+              <td id="third3">
+                <input type="text" name="street" placeholder=" 街道" size="3" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input type="text" name="revenue" placeholder=" 年度决算" />
+              </td>
+            </tr>
+            <tr>
+              <td id="forth1">
+                <input type="text" name="program" placeholder=" 项目开销" />
+              </td>
+              <td id="forth2">
+                <input type="text" name="admin" placeholder=" 管理开销" />
+              </td>
+              <td id="forth3">
+                <input type="text" name="fundraising" placeholder=" 决算开销" />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="3" id="red">
+                <input type="submit" value="注册" id="register" />
+              </td>
+            </tr>
+            {% for message in get_flashed_messages() %} &nbsp &nbsp &nbsp
+            &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            <span> {{ message }}</span>
+            {% endfor %}
+          </table>
+        </form>
+      </div>
+    </div>
+
+    <!-- <div id="main">
         <div id="signUp">
             <form method="post">
                 <span class="prompt">账户:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="account"
@@ -104,7 +274,6 @@
                 {% endfor %}
             </form>
         </div>
-    </div>
-</body>
-
+    </div> -->
+  </body>
 </html>
