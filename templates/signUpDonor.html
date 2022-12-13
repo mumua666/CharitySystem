@@ -111,6 +111,15 @@
       position: relative;
       top: -25%;
     }
+
+    #inform {
+      font-size: 26px;
+      font-weight: 700;
+      color: pink;
+      letter-spacing: 3px;
+      position: relative;
+      left: 10%;
+    }
   </style>
 </head>
 
@@ -176,7 +185,7 @@
           </tr>
           <tr>
             <td colspan="3">
-              <input type="text" name="zipCode" placeholder=" 邮编，6位数字" />
+              <input type="text" name="zipCode" placeholder=" 邮编, 6位数字" />
             </td>
           </tr>
 
@@ -187,9 +196,8 @@
             </td>
           </tr>
 
-          {% for message in get_flashed_messages() %} &nbsp &nbsp &nbsp
-          &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-          <span> {{ message }}</span>
+          {% for message in get_flashed_messages() %}
+          <span id="inform"> {{ message }}</span>
           {% endfor %}
         </table>
       </form>

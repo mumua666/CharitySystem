@@ -115,6 +115,15 @@
             width: 20%;
             padding-right: 30px;
         }
+
+        #inform {
+            font-size: 26px;
+            font-weight: 700;
+            color: pink;
+            letter-spacing: 3px;
+            position: relative;
+            left: 10%;
+        }
     </style>
 </head>
 
@@ -206,9 +215,8 @@
                             <input type="submit" value="注册" id="register" />
                         </td>
                     </tr>
-                    {% for message in get_flashed_messages() %} &nbsp &nbsp &nbsp
-                    &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                    <span> {{ message }}</span>
+                    {% for message in get_flashed_messages() %}
+                    <span id="inform"> {{ message }}</span>
                     {% endfor %}
                 </table>
             </form>
