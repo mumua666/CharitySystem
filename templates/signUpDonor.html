@@ -1,328 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>大爱无疆慈善中心注册页</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
 
-      body {
-        width: 1580px;
-        min-width: 1200px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大爱无疆慈善中心注册页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
 
-      #logogroup {
-        display: inline-block;
-        width: 100%;
-        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
-      }
+    body {
+      width: 1580px;
+      min-width: 1200px;
+    }
 
-      #logo1 a {
-        padding-left: 80px;
-      }
+    #logogroup {
+      display: inline-block;
+      width: 100%;
+      box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+    }
 
-      #main {
-        background-color: #fafbfc;
-        width: 100%;
-        display: inline-block;
-      }
+    #logo1 a {
+      padding-left: 80px;
+    }
 
-      #left {
-        float: left;
-        padding-left: 150px;
-        padding-top: 60px;
-        height: 480px;
-        width: 480px;
-      }
+    #main {
+      background-color: #fafbfc;
+      width: 100%;
+      display: inline-block;
+    }
 
-      #right {
-        float: left;
-        height: 570px;
-        width: 550px;
-        padding-top: 30px;
-        padding-left: 200px;
-      }
+    #left {
+      float: left;
+      padding-left: 150px;
+      padding-top: 60px;
+      height: 480px;
+      width: 480px;
+    }
 
-      table {
-        text-align: center;
-        border: 1px;
-        background-color: #fff;
-        width: 550px;
-        height: 520px;
-      }
+    #right {
+      float: left;
+      height: 570px;
+      width: 550px;
+      padding-top: 30px;
+      padding-left: 200px;
+    }
 
-      th {
-        color: #42464a;
-        font-size: 23px;
-        text-align: center;
-      }
+    table {
+      text-align: center;
+      border: 1px;
+      background-color: #fff;
+      width: 550px;
+      height: 520px;
+    }
 
-      input {
-        display: block;
-        width: 85%;
-        outline: none;
-        background: #fafbfc;
-        height: 40px;
-        line-height: 40px;
-        font-size: 16px;
-        border: 2px solid #edebeb;
-        color: #333;
-        margin: 0 auto;
-        border-radius: 5px;
-      }
+    th {
+      color: #42464a;
+      font-size: 23px;
+      text-align: center;
+    }
 
-      #register {
-        color: white;
-        background-color: red;
-        font-size: 18px;
-        font-weight: bold;
-      }
+    input {
+      display: block;
+      width: 85%;
+      outline: none;
+      background: #fafbfc;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      border: 2px solid #edebeb;
+      color: #333;
+      margin: 0 auto;
+      border-radius: 5px;
+    }
 
-      #second1 {
-        width: 180px;
-        padding-left: 27px;
-      }
+    #register {
+      color: white;
+      background-color: red;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-      #second2 {
-        width: 78%;
-      }
+    #second1 {
+      width: 180px;
+      padding-left: 27px;
+    }
 
-      #third1 {
-        width: 18%;
-        padding-left: 27px;
-      }
-      #third2 {
-        width: 16%;
-      }
-      #third3 {
-        width: 20%;
-        padding-right: 30px;
-      }
+    #second2 {
+      width: 78%;
+    }
 
-      #sign {
-        position: relative;
-        top: -25%;
-      }
+    #third1 {
+      width: 18%;
+      padding-left: 27px;
+    }
 
-      /* #main {
-            position: relative;
-            height: 900px;
-            width: 100%;
-            background-image: url('../static/background05.jpg');
-            background-position-x: 20%;
-            text-align: center;
-        }
+    #third2 {
+      width: 16%;
+    }
 
-        #signUp {
-            position: absolute;
-            top: 5%;
-            left: 50%;
-            text-align: center;
-            margin: 0 auto;
-            transform: translateX(-50%);
-            display: inline-block;
-        }
+    #third3 {
+      width: 20%;
+      padding-right: 30px;
+    }
 
-        #signUp p {
-            font-size: 26px;
-            color: red;
-            font-weight: 700;
-        }
+    #sign {
+      position: relative;
+      top: -25%;
+    }
+  </style>
+</head>
 
-        #signUp input {
-            height: 50px;
-            width: 75%;
-            margin: 0 auto;
-            font-size: 20px;
-            letter-spacing: 3px;
-            box-sizing: border-box;
-            text-align: center;
-            outline: none;
-            color: yellow;
-            border: none;
-            border-radius: 5px;
-            background-color: rgba(255, 192, 203, 0.49);
-        }
-
-        #signUp .gray {
-            color: gray;
-            font-size: 20px;
-        }
-
-        #signUp .prompt {
-            font-size: 20px;
-            letter-spacing: 3px;
-            color: pink;
-        }
-
-        #special {
-            font-size: 20px;
-            color: pink;
-            letter-spacing: 0;
-        }
-
-        span {
-            font-size: 20px;
-            color: white;
-            font-weight: 700;
-        } */
-    </style>
-  </head>
-
-  <body>
-    <div id="logogroup">
-      <span id="logo1">
-        <a href="#"> <img src="../static/44.png" alt="" /></a>
-      </span>
-    </div>
-    <div id="main">
-      <div id="left">
-        <img
-          src="../static/imga.png"
-          alt="加载失败"
-          height="480px"
-          width="480px"
-        />
-      </div>
-
-      <div id="right">
-        <form method="post">
-          <table
-            border="0"
-            style="border-collapse: separate; border-spacing: 10px"
-          >
-            <tr>
-              <th>
-                <img
-                  src="../static/person.png "
-                  alt=""
-                  width="45px"
-                  height="45px"
-                />
-                <span id="sign">&nbsp注册</span>
-              </th>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <input type="text" name="account" placeholder=" 账户" />
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <input type="password" name="password" placeholder=" 密码" />
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <input
-                  type="password"
-                  name="password2"
-                  placeholder=" 确认密码"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td id="second1">
-                <input type="text" name="last_name" placeholder=" 姓氏" />
-              </td>
-              <td colspan="2">
-                <input
-                  type="text"
-                  name="first_name"
-                  placeholder=" 名字"
-                  id="second2"
-                />
-              </td>
-            </tr>
-
-            <tr>
-              <td colspan="3">
-                <input
-                  type="text"
-                  name="telphone"
-                  placeholder=" 电话，11位数字"
-                />
-              </td>
-            </tr>
-            <tr>
-              <td id="third1">
-                <input type="text" name="state" placeholder=" 省份" />
-              </td>
-              <td id="third2">
-                <input type="text" name="city" placeholder=" 城市" />
-              </td>
-              <td id="third3">
-                <input type="text" name="street" placeholder=" 街道" />
-              </td>
-            </tr>
-            <!-- <tr>
-              <td>
-                <input type="text" name="city" value="城市" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="text" name="street" value="街道" />
-              </td>
-            </tr> -->
-            <tr>
-              <td colspan="3">
-                <input
-                  type="text"
-                  name="zipCode"
-                  placeholder=" 邮编，6位数字"
-                />
-              </td>
-            </tr>
-
-            &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <tr>
-              <td colspan="3" id="red">
-                <input type="submit" value="注  册" id="register" />
-              </td>
-            </tr>
-
-            {% for message in get_flashed_messages() %} &nbsp &nbsp &nbsp
-            &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <span> {{ message }}</span>
-            {% endfor %}
-          </table>
-        </form>
-      </div>
+<body>
+  <div id="logogroup">
+    <span id="logo1">
+      <a href="#"> <img src="../static/44.png" alt="" /></a>
+    </span>
+  </div>
+  <div id="main">
+    <div id="left">
+      <img src="../static/imga.png" alt="加载失败" height="480px" width="480px" />
     </div>
 
-    <!-- <div id="main">
-        <div id="signUp">
-            <form method="post">
-                <span class="prompt">账户:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="account"
-                    value="d+六位数字"><br><br>
-                <span class="prompt">密码:</span> &nbsp &nbsp &nbsp &nbsp<input type="password" name="password"><br><br>
-                <span id="special">确认密码: &nbsp</span><input type="password" name="password2"><br> <br>
-                <span class="prompt">姓氏:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="last_name"><br><br>
-                <span class="prompt">名字:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="first_name"><br><br>
-                <span class="prompt">电话:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="telphone"
-                    value="11位数字"><br><br>
-                <span class="prompt">省份:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="state"><br><br>
-                <span class="prompt">城市:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="city"><br><br>
-                <span class="prompt">街道:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="street"><br><br>
-                <span class="prompt">邮编:</span> &nbsp &nbsp &nbsp &nbsp<input type="text" name="zipCode"
-                    value="6位数字"><br><br>
+    <div id="right">
+      <form method="post">
+        <table border="0" style="border-collapse: separate; border-spacing: 10px">
+          <tr>
+            <th>
+              <img src="../static/person.png " alt="" width="45px" height="45px" />
+              <span id="sign">&nbsp注册</span>
+            </th>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <input type="text" name="account" placeholder=" 账户" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <input type="password" name="password" placeholder=" 密码" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <input type="password" name="password2" placeholder=" 确认密码" />
+            </td>
+          </tr>
+          <tr>
+            <td id="second1">
+              <input type="text" name="last_name" placeholder=" 姓氏" />
+            </td>
+            <td colspan="2">
+              <input type="text" name="first_name" placeholder=" 名字" id="second2" />
+            </td>
+          </tr>
 
-                <br><br><br>
-                &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                <input type="submit" value="注册"><br>
-                {% for message in get_flashed_messages() %}
-                &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                &nbsp &nbsp &nbsp
-                <span> {{ message }}</span>
-                {% endfor %}
-            </form>
-        </div>
-    </div> -->
-  </body>
+          <tr>
+            <td colspan="3">
+              <input type="text" name="telphone" placeholder=" 电话，11位数字" />
+            </td>
+          </tr>
+          <tr>
+            <td id="third1">
+              <input type="text" name="state" placeholder=" 省份" />
+            </td>
+            <td id="third2">
+              <input type="text" name="city" placeholder=" 城市" />
+            </td>
+            <td id="third3">
+              <input type="text" name="street" placeholder=" 街道" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <input type="text" name="zipCode" placeholder=" 邮编，6位数字" />
+            </td>
+          </tr>
+
+          &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+          <tr>
+            <td colspan="3" id="red">
+              <input type="submit" value="注  册" id="register" />
+            </td>
+          </tr>
+
+          {% for message in get_flashed_messages() %} &nbsp &nbsp &nbsp
+          &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+          <span> {{ message }}</span>
+          {% endfor %}
+        </table>
+      </form>
+    </div>
+  </div>
+</body>
+
 </html>
