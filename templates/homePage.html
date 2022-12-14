@@ -456,25 +456,25 @@
                 <th>捐赠数量</th>
                 <th>捐赠选项</th>
             </tr>
-            <tr>
-                <td>
-                    <input type="text" name="charityID" class="donate">
-                </td>
-                <td>
-                    <input type="text" name="donorID" class="donate">
-                </td>
-                <td>
-                    <input type="text" name="donateType" class="donate">
-                </td>
-                <td>
-                    <input type="text" name="donateAmount" class="donate">
-                </td>
-                <td>
-                    <form method="post">
-                        <input type="submit" name="realname" value="实名捐赠" class="donateButton">
-                        <input type="submit" name="anonymous" value="匿名捐赠" class="donateButton">
-                    </form>
-                </td>
+            <form method="post">
+                <tr>
+                    <td>
+                        <input type="text" name="charityID" class="donate">
+                    </td>
+                    <td>
+                        <input type="text" name="donorID" class="donate">
+                    </td>
+                    <td>
+                        <input type="text" name="donateType" class="donate">
+                    </td>
+                    <td>
+                        <input type="text" name="donateAmount" class="donate">
+                    </td>
+                    <td>
+                        <button type="submit" name="realname" class="donateButton" value="实名捐赠">实名捐赠</button>
+                        <button type="submit" name="anonymous" class="donateButton" value="匿名捐赠">匿名捐赠</button>
+                    </td>
+            </form>
             </tr>
         </table>
         <hr>
@@ -491,10 +491,10 @@
             </tr>
 
             <tr>
-                <td>giftDonate.gift_charity</td>
-                <td>giftDonate.gift_donor</td>
-                <td>giftDonate.gift_name</td>
-                <td>giftDonate.amount</td>
+                <td>{{giftDonate.gift_charity}}</td>
+                <td>{{giftDonate.gift_donor}}</td>
+                <td>{{giftDonate.gift_name}}</td>
+                <td>{{giftDonate.amount}}</td>
                 {% if realname %}
                 <td>实名捐赠</td>
                 {% elif anonymous %}

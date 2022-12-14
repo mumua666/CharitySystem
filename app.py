@@ -312,37 +312,37 @@ def homePage():
         donateAmount = request.form.get('donateAmount')
         realname = request.form.get('realname')
         anonymous = request.form.get('anonymous')
+        donateDonor = Donor.query.filter_by(donor_id=donorID).first()
+        donateCharity = Charity.query.filter_by(charity_id=charityID).first()
         if all([last_name, first_name]):
             donorName = last_name+first_name
         if logout:
             return redirect(url_for('index'))
-        '''
-        此处存在问题,无法获取到input输入的内容,待修复!
-        '''
         if donorID:
-            print('==============================================')
-            print(donorID)
-            if not Donor.query.filter_by(donor_id=donorID).first():
+            if not donateDonor:
                 flash("只有注册为捐赠者才可以进行捐赠哦！")
-            elif Charity.query.filter_by(charity_id=charityID).first():
+            elif not donateCharity:
                 flash("该慈善机构ID并不存在!")
             else:
                 curr_time = datetime.datetime.now()
                 if realname:
                     giftDonate = Gift(gift_name=donateType, gift_donor=donorID, gift_charity=charityID,
-                                      category=Charity.query.filter_by(
-                                          charity_id=charityID).first().category.category_name,
-                                      data=datetime.datetime.strftime(
+                                      category=donateCharity.category.category_name,
+                                      date=datetime.datetime.strftime(
                                           curr_time, '%Y-%m-%d %H:%M:%S'),
                                       amount=donateAmount)
                 elif anonymous:
-                    giftDonate = Gift(gift_name=donateType, gift_donor=donorID, gift_charity=charityID,
-                                      category=Charity.query.filter_by(
-                                          charity_id=charityID).first().category.category_name,
-                                      data=datetime.datetime.strftime(
+                    anonymousID = Donor.query.filter_by(
+                        donor_id="anonymous").first()
+                    donateAmount = int(1.5*int(donateAmount))
+                    giftDonate = Gift(gift_name=donateType, gift_donor=anonymousID.donor_id, gift_charity=charityID,
+                                      category=donateCharity.category.category_name,
+                                      date=datetime.datetime.strftime(
                                           curr_time, '%Y-%m-%d %H:%M:%S'),
                                       amount=donateAmount)
-                db.session.add(giftDonate)
+                log = Log(log_id=donorID, operation_table='gift', operation_name="添加", operation_tuple=Gift.query.count()+1,
+                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+                db.session.add_all([log, giftDonate])
                 db.session.commit()
 
         if categoryName:
@@ -430,8 +430,7 @@ def homePage():
                            donors=donors, charities=charities, gifts=gifts,
                            displayCharity=displayCharity, displayDonor=displayDonor, displayGift=displayGift,
                            categoryName=categoryName, categoryName_Charity=categoryName_Charity, displayCategory=displayCategory,
-                           gifted_donors=gift,
-                           displayGiver=displayGiver, Giver=Giver, checkCharity=checkCharity,
+                           gifted_donors=gift, displayGiver=displayGiver, Giver=Giver, checkCharity=checkCharity,
                            displayCheckDonor=displayCheckDonor, donorName=donorName, checkDonor=checkDonor,
                            giftDonate=giftDonate, realname=realname, anonymous=anonymous)
 
@@ -465,7 +464,9 @@ if __name__ == '__main__':
                address="中山市xxxx", city="中山", state="广东", zip="xxxxxx", telephone="12345678900")
     d2 = Donor(donor_id="d000002", password="d000002", last_name="公孙", first_name="向阳",
                address="惠州市xxxx", city="惠州", state="广东", zip="xxxxxx", telephone="00987654321")
-    db.session.add_all([d1, d2])
+    d3 = Donor(donor_id="anonymous", password="anonymous", last_name="匿名者", first_name="anonymous",
+               address="暂无数据", city="暂无数据", state="暂无数据", zip="暂无数据", telephone="暂无数据")
+    db.session.add_all([d1, d2, d3])
     db.session.commit()
 
     curr_time = datetime.datetime.now()
@@ -483,16 +484,16 @@ if __name__ == '__main__':
     db.session.commit()
 
     curr_time = datetime.datetime.now()
-    log1 = Log(log_id=c1.charity_id, operation_name="注册", log_time=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'))
-    log2 = Log(log_id=c2.charity_id, operation_name="注册", log_time=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'))
-    log3 = Log(log_id=c3.charity_id, operation_name="注册", log_time=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'))
-    log4 = Log(log_id=d1.donor_id, operation_name="注册", log_time=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'))
-    log5 = Log(log_id=d2.donor_id, operation_name="注册", log_time=datetime.datetime.strftime(
-        curr_time, '%Y-%m-%d %H:%M:%S'))
+    log1 = Log(log_id=c1.charity_id, operation_table='charity', operation_name="添加",
+               operation_tuple=c1.charity_id, log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+    log2 = Log(log_id=c2.charity_id,  operation_table='charity', operation_name="添加",
+               operation_tuple=c2.charity_id, log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+    log3 = Log(log_id=c3.charity_id,  operation_table='charity', operation_name="添加",
+               operation_tuple=c3.charity_id, log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+    log4 = Log(log_id=d1.donor_id,  operation_table='donor', operation_name="添加",
+               operation_tuple=d1.donor_id, log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+    log5 = Log(log_id=d2.donor_id,  operation_table='donor', operation_name="添加",
+               operation_tuple=d2.donor_id, log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
     db.session.add_all([log1, log2, log3, log4, log5])
     db.session.commit()
     # db.drop_all()   #用于演示时清空数据库表内容
