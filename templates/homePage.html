@@ -366,6 +366,7 @@
             </tr>
             {% for gift in gifted_donors %}
             <tr>
+                {% if gift.gift_donors %}
                 <td>{{ gift.gift_donors.donor_id }}</td>
                 <td>{{ gift.gift_donors.last_name }}</td>
                 <td>{{ gift.gift_donors.first_name }}</td>
@@ -374,6 +375,16 @@
                 <td>{{ gift.gift_donors.city }}</td>
                 <td>{{ gift.gift_donors.address }}</td>
                 <td>{{ gift.gift_donors.zip }}</td>
+                {% else %}
+                <td>anonymous</td>
+                <td>anonymous</td>
+                <td>anonymous</td>
+                <td>暂无数据</td>
+                <td>暂无数据</td>
+                <td>暂无数据</td>
+                <td>暂无数据</td>
+                <td>暂无数据</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </table>
