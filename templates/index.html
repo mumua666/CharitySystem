@@ -1,167 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>大爱无疆慈善中心登录页</title>
+    <style>
+      body {
+        width: 1580px;
+        min-width: 1200px;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>大爱无疆慈善中心登录页</title>
-  <style>
-    body {
-      width: 1550px;
-      min-width: 1200px;
-    }
+      #logogroup {
+        display: inline-block;
+        width: 1580px;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+      }
 
-    #logogroup {
-      display: inline-block;
-      width: 100%;
-      box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
-    }
+      #logo1 a {
+        padding-left: 80px;
+      }
 
-    #logo1 a {
-      padding-left: 80px;
-    }
+      #main {
+        background-color: #fafbfc;
+        width: 100%;
+        margin-top: 4px;
+        display: inline-block;
+      }
 
-    #main {
-      background-color: #fafbfc;
-      width: 100%;
-      display: inline-block;
-    }
+      #left {
+        float: left;
+        padding-left: 150px;
+        padding-top: 60px;
+        height: 480px;
+        width: 480px;
+      }
 
-    #left {
-      float: left;
-      padding-left: 150px;
-      padding-top: 60px;
-      height: 480px;
-      width: 480px;
-    }
+      #right {
+        float: left;
+        height: 550px;
+        width: 550px;
+        padding-top: 60px;
+        padding-left: 200px;
+      }
 
-    #right {
-      float: left;
-      height: 550px;
-      width: 550px;
-      padding-top: 60px;
-      padding-left: 200px;
-    }
+      table {
+        border: 1px;
+        background-color: #fff;
+        width: 550px;
+        height: 520px;
+        box-shadow: 0 4px 12px 0 rgb(0 0 0 / 5%);
+      }
 
-    table {
-      border: 1px;
-      background-color: #fff;
-      width: 550px;
-      height: 550px;
-    }
+      th {
+        color: rgb(35, 112, 234);
+        font-size: 23px;
+        text-align: center;
+      }
 
-    th {
-      color: rgb(35, 112, 234);
-      font-size: 23px;
-      text-align: center;
-    }
+      input {
+        display: block;
+        width: 450px;
+        outline: none;
+        background: #fafbfc;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        border: 2px solid #edebeb;
+        color: #333;
+        margin: 0 auto;
+        border-radius: 5px;
+      }
 
-    input {
-      display: block;
-      width: 450px;
-      outline: none;
-      background: #fafbfc;
-      height: 40px;
-      line-height: 40px;
-      font-size: 16px;
-      border: 2px solid #edebeb;
-      color: #333;
-      margin: 0 auto;
-      border-radius: 5px;
-    }
+      #red {
+        background-color: red;
+        color: white;
+        line-height: 40px;
+      }
 
-    #red {
-      background-color: red;
-      color: white;
-      line-height: 40px;
-    }
+      .inputText {
+        text-align: center;
+        letter-spacing: 3px;
+        color: gray;
+      }
 
-    .inputText {
-      text-align: center;
-      letter-spacing: 3px;
-      color: gray;
-    }
+      #inform {
+        font-size: 26px;
+        font-weight: 700;
+        color: pink;
+        letter-spacing: 3px;
+        position: relative;
+        left: 30%;
+      }
 
-    #inform {
-      font-size: 26px;
-      font-weight: 700;
-      color: pink;
-      letter-spacing: 3px;
-      position: relative;
-      left: 30%;
-    }
+      #jump {
+        position: relative;
+        left: 40%;
+      }
 
-    #jump {
-      position: relative;
-      left: 40%;
-    }
+      #jump a:link {
+        text-decoration: none;
+        color: gray;
+      }
 
-    #jump a:link {
-      text-decoration: none;
-      color: gray;
-    }
+      #jump a:visited {
+        text-decoration: none;
+        color: gray;
+      }
 
-    #jump a:visited {
-      text-decoration: none;
-      color: gray;
-    }
+      #jump a:hover {
+        text-decoration: none;
+        color: blue;
+        text-decoration: underline;
+      }
 
-    #jump a:hover {
-      text-decoration: none;
-      color: blue;
-      text-decoration: underline;
-    }
+      #jump a:active {
+        text-decoration: none;
+        color: red;
+      }
+    </style>
+  </head>
 
-    #jump a:active {
-      text-decoration: none;
-      color: red;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="logogroup">
-    <span id="logo1">
-      <a href="#"> <img src="../static/44.png" alt="" /></a>
-    </span>
-  </div>
-  <div id="main">
-    <div id="left">
-      <img src="../static/imga.png" alt="加载失败" height="480px" width="480px" />
+  <body>
+    <div id="logogroup">
+      <span id="logo1">
+        <a href="#"> <img src="../static/44.png" alt="" /></a>
+      </span>
     </div>
-    <div id="right">
-      <form method="post">
-        <table border="0">
-          <tr>
-            <th>用户登录</th>
-          </tr>
-          <tr>
-            <td>
-              <input type="account" name="account" placeholder="请输入账号" class="inputText" />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <input type="password" name="password" placeholder="请输入密码" class="inputText" /><br />
-            </td>
-          </tr>
-          <tr>
-            <td><input type="submit" value="登录" id="red" /></td>
-          </tr>
-          <tr>
-            <td>
-              <p id="jump"><a href="./signUp.html">没有账号？点我注册</a></p>
-            </td>
-          </tr>
+    <div id="main">
+      <div id="left">
+        <img
+          src="../static/imga.png"
+          alt="加载失败"
+          height="480px"
+          width="480px"
+        />
+      </div>
+      <div id="right">
+        <form method="post">
+          <table border="0">
+            <tr>
+              <th>用户登录</th>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="account"
+                  name="account"
+                  placeholder="请输入账号"
+                  class="inputText"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="请输入密码"
+                  class="inputText"
+                /><br />
+              </td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="登录" id="red" /></td>
+            </tr>
+            <tr>
+              <td>
+                <p id="jump"><a href="./signUp.html">没有账号？点我注册</a></p>
+              </td>
+            </tr>
 
-          {% for message in get_flashed_messages() %}
-          <td id="inform"><span> {{ message }}</span></td>
-          {% endfor %}
-        </table>
-      </form>
+            {% for message in get_flashed_messages() %}
+            <td id="inform"><span> {{ message }}</span></td>
+            {% endfor %}
+          </table>
+        </form>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
