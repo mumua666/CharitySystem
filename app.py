@@ -166,8 +166,8 @@ def signUpDonor():
             flash('账号已存在!!!')
         elif len(account) != 3:
             flash('账号长度必须为3位!!!')
-        elif len(zipCode) != 6:
-            flash('邮编长度必须为6位!!!')
+        elif len(zipCode) != 5:
+            flash('邮编长度必须为5位!!!')
         elif len(telphone) != 10:
             flash('电话号码必须是10位!!!')
         elif phone:
