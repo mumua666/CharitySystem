@@ -8,68 +8,105 @@
     <title>大爱无疆慈善中心主页</title>
     <style>
         body {
-            background-color: pink;
-            width: 1550px;
+            width: 1520px;
             min-width: 1200px;
+        }
+
+        *{
+            padding: 0;
+        }
+
+        #head {
+             display: inline-block;
+             width: 1520px;
+              box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+        }
+
+        #logo1{
+            float: left;
+        }
+
+        #logo1 a {
+             padding-left: 80px;
+        }
+
+        #right{
+            float: right;
         }
 
         #main {
             height: auto;
             width: 100%;
-            background-image: url("../static/background05.jpg");
-            background-attachment: fixed;
-            background-position-x: 20%;
-            background-repeat: repeat-y;
-            text-align: center;
         }
 
-        #head {
-            text-align: center;
-            font-size: 50px;
-            color: orange;
-            font-weight: 700;
-            letter-spacing: 10px;
-        }
-
-        #nav,
-        #menu,
-        #queryBar {
+        #menu{
             list-style: none;
             display: flex;
             justify-content: center;
-            color: yellow;
-            font-size: 30px;
+            font-size: 17px;
         }
 
-        #nav li,
+        #queryBar {
+            list-style: none;
+            display: flex;
+            font-size: 16px;
+        }
+
         #menu li {
-            margin: 0 40px;
+            margin-top: 2px;
         }
 
-        .input,
-        .quickQuery,
+        .input{
+            width: 120px;
+            height: 30px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-align: center;
+            outline: none;
+            border: 0px;
+            background-color: #fff;
+            
+        }
+
+        .queryTable{
+            border: 2px solid #e5e5e5;
+            padding-left: 20px;
+            padding-top: 10px;
+            width: 1200px;
+            height: 250px;
+            margin: 20px auto;
+        }
+
+        .tabletext{
+            float: left;
+        }
+
+        .quickQuery{
+            width: 85px;
+            height: 28px;
+            font-size: 16px;
+            border: 0px;
+            outline: none;
+            border-radius: 3px;
+            background-color: #fff;
+            
+        }
+
         .complexQuery {
-            width: 150px;
-            height: 40px;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 3px;
+            width: 250px;
+            height: 30px;
+            font-size: 16px;
+            letter-spacing: 1px;
             box-sizing: border-box;
             text-align: center;
             outline: none;
-            color: rgb(0, 255, 89);
-            border-radius: 15px;
-            background-color: rgba(220, 226, 41, 0.49);
+            border: 1px solid #e5e5e5;
         }
 
         #queryBar li {
-            margin: 0 20px;
+            margin: -3px 10px;
         }
 
-        .complexQuery {
-            width: 400px;
-            color: white;
-        }
 
         #queryBar2 {
             display: block;
@@ -81,88 +118,89 @@
         }
 
         button {
-            height: 40px;
-            width: 80px;
-            margin: 5px 0 5px 20px;
-            background-color: rgba(220, 226, 41, 0.49);
-            color: rgb(0, 255, 89);
-            font-size: 26px;
-            font-weight: 700;
-            border-radius: 15px;
-        }
-
-        span {
-            color: aqua;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        h2 {
-            color: red;
-            font-size: 45px;
-            margin: 0;
+            height: 30px;
+            width: 55px;
+            margin: 5px 0 5px 10px;
+            font-size: 16px;
         }
 
         hr {
             color: aquamarine;
         }
 
+        #queryBar input:focus {
+            background-color: red;
+            color: #fff;
+        }
+
+        #queryBar input:hover{
+            background-color: red;
+            color: #fff;
+        }
+
+        #queryBar input:active{
+            background-color: red;
+            color: #fff;
+        }
+        
 
         table {
-            width: 100%;
-            border: 1px black solid;
+            width: 1220px;
+            margin: 0 auto;
+            border: 1px solid #e5e5e5;
             margin-bottom: 100px;
         }
 
         table td,
         th {
-            border: 1px black solid;
+            border: 1px solid #e5e5e5;
+            text-align: center;
         }
 
         table th {
-            color: yellow;
-            font-size: 20px;
-            font-weight: 700;
+            color: #333;
+            font-size:17px;
+            background-color: #f5f4f3;
+            border-top: 2px solid #dd2020;
+            padding: 10px 10px;
+
         }
 
         table td {
-            color: lightgreen;
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 17px;
+            color: #666;
+            padding: 10px 10px;
+        }
+
+        h3{
+            padding-left: 150px;
+            color: #db3b3b;
         }
 
         .donate {
             height: 30px;
             width: 200px;
-            background-color: aquamarine;
-            color: red;
-            font-size: 20px;
+            background-color: rgb(250, 235, 232);
+            border: 0px;
+            font-size: 18px;
             text-align: center;
         }
 
         .donateButton {
-            height: 40px;
-            width: 100px;
+            height: 30px;
+            width: 95px;
             margin: 5px 0;
-            background-color: rgba(220, 226, 41, 0.49);
-            color: rgb(0, 255, 89);
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 15px;
+            font-size: 18px;
         }
 
         #footer {
-            height: 150px;
-            font-size: 20px;
-            color: white;
+            height: 50px;
         }
 
-        #footer span {
-            font-size: 20px;
-            color: lightgreen;
-            font-weight: 700;
+        p{
+            color:#333;
+            text-align: center;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -170,62 +208,66 @@
 <body>
     <div id="main">
         <div id="head">
-            <h1>欢迎登录大爱无疆慈善中心</h1>
-            <ul id="nav">
-                <li>登录账号: <span>{{logID.log_id}}</span></li>
-                <li>登录名称: <span>{{logName}}</span></li>
-            </ul>
+            <span id="logo1">
+                <a href="#"> <img src="../static/44.png" alt="" /></a>
+              </span>
+              <form method="post" id="right">
+                <ul id="menu">
+                    <li><input type="submit" value="修改信息" class="input" name="changeInfo" style="cursor:pointer"></li>
+                    <li><input type="submit" value="注销账户" class="input" name="deleteItem" style="cursor:pointer"></li>
+                    <li><input type="submit" value="返回 >" class="input" name="logout" style="cursor:pointer"></li>
+                </ul>
+            </form>
         </div>
-        <form method="post">
-            <ul id="menu">
-                <li><input type="submit" value="退出登录" class="input" name="logout"></li>
-                <li><input type="submit" value="修改信息" class="input" name="changeInfo"></li>
-                <li><input type="submit" value="注销账户" class="input" name="deleteItem"></li>
-            </ul>
-        </form>
-        <hr>
-        <form method="post">
-            <h2>快捷查询项</h2>
-            <ul id="queryBar">
-                <li>
-                    <input type="submit" value="慈善机构" class="quickQuery" name="charity">
-                </li>
-                <li>
-                    <input type="submit" value="捐助者" class="quickQuery" name="donor">
-                </li>
-                <li>
-                    <input type="submit" value="捐赠物" class="quickQuery" name="gift">
-                </li>
-                <li>
-                    <input type="submit" value="清空查询" class="quickQuery" name="reset">
-                </li>
-            </ul>
-        </form>
-        <hr>
-        <form method="post">
-            <h2>自定义查询</h2>
-            <ul id="queryBar2">
-                <li>
-                    <input type="text" size="10" placeholder="请输入类别名" name="categoryName" class="complexQuery">
-                    <button type="submit">查询</button>
-                </li>
-                <li>
-                    <input type="text" size="10" placeholder="请输入机构名" name="charityName" class="complexQuery">
-                    <button type="submit">查询</button>
-                </li>
-                <li>
-                    <input type="text" size="10" placeholder="捐赠姓氏" name="donorName1" class="complexQuery"
-                        style="width:195px">
-                    <input type="text" size="10" placeholder="捐赠名字" name="donorName2" class="complexQuery"
-                        style="width:195px">
-                    <button type="submit">查询</button>
-                </li>
-            </ul>
-        </form>
-        <hr>
+
+        <div class="queryTable">
+            <form method="post">
+                <span class="tabletext">快捷查询：</span>
+                <span>
+                    <ul id="queryBar">
+                        <li>
+                            <input type="submit" value="慈善机构" class="quickQuery" name="charity" style="cursor:pointer">
+                        </li>
+                        <li>
+                            <input type="submit" value="捐助者" class="quickQuery" name="donor" style="cursor:pointer">
+                        </li>
+                        <li>
+                            <input type="submit" value="捐赠物" class="quickQuery" name="gift" style="cursor:pointer">
+                        </li>
+                        <li>
+                            <input type="submit" value="清空查询" class="quickQuery" name="reset" style="cursor:pointer">
+                        </li>
+                    </ul>
+                </span>
+
+            </form>
+
+            <form method="post">
+                <span class="tabletext">自定义查询：</span>
+                <br>
+                <ul id="queryBar2">
+                    <li>
+                        <input type="text" size="10" placeholder="请输入类别名" name="categoryName" class="complexQuery">
+                        <button type="submit" style="cursor:pointer">查询</button>
+                    </li>
+                    <li>
+                        <input type="text" size="10" placeholder="请输入机构名" name="charityName" class="complexQuery">
+                        <button type="submit" style="cursor:pointer">查询</button>
+                    </li>
+                    <li>
+                        <input type="text" size="10" placeholder="捐赠姓氏" name="donorName1" class="complexQuery"
+                            style="width:124px">
+                        <input type="text" size="10" placeholder="捐赠名字" name="donorName2" class="complexQuery"
+                            style="width:124px">
+                        <button type="submit" style="cursor:pointer">查询</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+
         {% if displayCharity %}
         {% if charities %}
-        <h2>慈善机构列表</h2>
+        <h3>慈善机构列表</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
@@ -251,13 +293,13 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>当前尚无慈善机构注册</h2>
+        <h3>当前尚无慈善机构注册</h3>
         {% endif %}
         {% endif %}
 
         {% if displayDonor %}
         {% if donors %}
-        <h2>捐赠者列表</h2>
+        <h3>捐赠者列表</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
@@ -283,13 +325,13 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>当前尚无捐赠者注册</h2>
+        <h3>当前尚无捐赠者注册</h3>
         {% endif %}
         {% endif %}
 
         {% if displayGift %}
         {% if gifts%}
-        <h2>捐赠物列表</h2>
+        <h3>捐赠物列表</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>捐赠类别</th>
@@ -317,13 +359,13 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>当前尚未收到任何捐赠</h2>
+        <h3>当前尚未收到任何捐赠</h3>
         {% endif %}
         {% endif %}
 
         {% if displayCategory %}
         {% if categoryName_Charity %}
-        <h2>{{categoryName}}类别慈善机构列表</h2>
+        <h3>{{categoryName}}类别慈善机构列表</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
@@ -352,7 +394,7 @@
         <h2>当前尚无{{categoryName}}类别慈善机构</h2>
         {% endif %}
         {% if gifted_donors %}
-        <h2>{{categoryName}}类别的捐赠者</h2>
+        <h3>{{categoryName}}类别的捐赠者</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
@@ -389,14 +431,14 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>当前尚无捐赠者注册</h2>
+        <h3>当前尚无捐赠者注册</h3>
         {% endif %}
         {% endif %}
 
 
         {% if displayGiver %}
         {% if Giver %}
-        <h2>{{checkCharity.name}}受捐赠列表</h2>
+        <h3>{{checkCharity.name}}受捐赠列表</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
@@ -420,13 +462,13 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>当前尚未收到任何捐赠</h2>
+        <h3>当前尚未收到任何捐赠</h3>
         {% endif %}
         {% endif %}
 
         {% if displayCheckDonor %}
         {% if checkDonor %}
-        <h2>{{donorName}}捐赠列表</h2>
+        <h3>{{donorName}}捐赠列表</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>ID</th>
@@ -456,11 +498,11 @@
             {% endfor %}
         </table>
         {% else %}
-        <h2>尚未查到{{donorName}}的捐赠记录</h2>
+        <h3>尚未查到{{donorName}}的捐赠记录</h3>
         {% endif %}
         {% endif %}
 
-        <h2>快捷捐赠</h2>
+        <h3>快捷捐赠</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>受赠机构ID</th>
@@ -484,8 +526,8 @@
                         <input type="text" name="donateAmount" class="donate">
                     </td>
                     <td>
-                        <button type="submit" name="realname" class="donateButton" value="实名捐赠">实名捐赠</button>
-                        <button type="submit" name="anonymous" class="donateButton" value="匿名捐赠">匿名捐赠</button>
+                        <button type="submit" name="realname" class="donateButton" value="实名捐赠" style="cursor:pointer">实名捐赠</button>
+                        <button type="submit" name="anonymous" class="donateButton" value="匿名捐赠" style="cursor:pointer">匿名捐赠</button>
                     </td>
             </form>
             </tr>
@@ -493,7 +535,7 @@
         <hr>
 
         {% if giftDonate %}
-        <h2>捐赠成功</h2>
+        <h3>捐赠成功</h3>
         <table cellspacing="0" cellpadding="10">
             <tr>
                 <th>受赠机构ID</th>
@@ -527,5 +569,4 @@
         </div>
     </div>
 </body>
-
 </html>
