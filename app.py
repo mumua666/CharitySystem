@@ -47,8 +47,8 @@ class Charity(db.Model):
     charity_id = db.Column(db.String(32), unique=True)
     password = db.Column(db.String(32), unique=False)
     category_id = db.Column(db.Integer, unique=False)
-    name = db.Column(db.String(32), unique=True)
-    address = db.Column(db.String(32), unique=True)  # 此属性不允许重复
+    name = db.Column(db.String(255), unique=True)
+    address = db.Column(db.String(255), unique=True)  # 此属性不允许重复
     city = db.Column(db.String(32), unique=False)
     state = db.Column(db.String(32), unique=False, nullable=True)  # 此属性允许为空
     telephone = db.Column(db.String(32), unique=True)
