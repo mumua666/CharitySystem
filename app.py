@@ -223,8 +223,8 @@ def signUpCharity():
             flash('机构名称已被注册!!!')
         elif len(account) != 4:
             flash('账号长度必须为4位!!!')
-        elif len(telphone) != 13:
-            flash('电话号码必须是11位数字!!!')
+        elif len(telphone) != 12:
+            flash('电话号码必须是10位数字!!!')
         elif _telphone:
             flash('电话号码已被注册使用!!!')
         else:
