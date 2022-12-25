@@ -532,6 +532,6 @@ if __name__ == '__main__':
                operation_tuple=d2.donor_id, log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
     db.session.add_all([log1, log2, log3, log4, log5])
     db.session.commit()
-    # db.drop_all()   #用于演示时清空数据库表内容
+    # db.drop_all()  # 用于演示时清空数据库表内容
     # 开启调试
     app.run(debug=True)
