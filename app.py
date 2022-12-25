@@ -168,8 +168,8 @@ def signUpDonor():
             flash('账号长度必须为3位!!!')
         elif len(zipCode) != 6:
             flash('邮编长度必须为6位!!!')
-        elif len(telphone) != 11:
-            flash('电话号码必须是11位!!!')
+        elif len(telphone) != 10:
+            flash('电话号码必须是10位!!!')
         elif phone:
             flash('电话号码已被注册使用!!!')
         else:

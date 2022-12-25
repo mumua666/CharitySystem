@@ -12,25 +12,25 @@
             min-width: 1200px;
         }
 
-        *{
+        * {
             padding: 0;
         }
 
         #head {
-             display: inline-block;
-             width: 1520px;
-              box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+            display: inline-block;
+            width: 1520px;
+            box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
         }
 
-        #logo1{
+        #logo1 {
             float: left;
         }
 
         #logo1 a {
-             padding-left: 80px;
+            padding-left: 80px;
         }
 
-        #right{
+        #right {
             float: right;
         }
 
@@ -39,7 +39,7 @@
             width: 100%;
         }
 
-        #menu{
+        #menu {
             list-style: none;
             display: flex;
             justify-content: center;
@@ -56,19 +56,37 @@
             margin-top: 2px;
         }
 
-        .input{
+        .input {
             width: 120px;
             height: 30px;
             font-size: 16px;
+            font-weight: 700;
             letter-spacing: 1px;
+            color: gray;
             text-align: center;
             outline: none;
             border: 0px;
             background-color: #fff;
-            
+            border-radius: 5px;
+
         }
 
-        .queryTable{
+        .input:focus {
+            background-color: red;
+            color: #fff;
+        }
+
+        .input:hover {
+            background-color: red;
+            color: #fff;
+        }
+
+        .input:active {
+            background-color: red;
+            color: #fff;
+        }
+
+        .queryTable {
             border: 2px solid #e5e5e5;
             padding-left: 20px;
             padding-top: 10px;
@@ -77,19 +95,22 @@
             margin: 20px auto;
         }
 
-        .tabletext{
+        .tabletext {
             float: left;
+            font-weight: 700;
         }
 
-        .quickQuery{
+        .quickQuery {
             width: 85px;
             height: 28px;
             font-size: 16px;
+            font-weight: 700;
             border: 0px;
             outline: none;
             border-radius: 3px;
+            color: #666;
             background-color: #fff;
-            
+
         }
 
         .complexQuery {
@@ -122,6 +143,9 @@
             width: 55px;
             margin: 5px 0 5px 10px;
             font-size: 16px;
+            background-color: #fff;
+            border-radius: 5px;
+            color: #333;
         }
 
         hr {
@@ -133,16 +157,16 @@
             color: #fff;
         }
 
-        #queryBar input:hover{
+        #queryBar input:hover {
             background-color: red;
             color: #fff;
         }
 
-        #queryBar input:active{
+        #queryBar input:active {
             background-color: red;
             color: #fff;
         }
-        
+
 
         table {
             width: 1220px;
@@ -159,7 +183,7 @@
 
         table th {
             color: #333;
-            font-size:17px;
+            font-size: 17px;
             background-color: #f5f4f3;
             border-top: 2px solid #dd2020;
             padding: 10px 10px;
@@ -172,7 +196,7 @@
             padding: 10px 10px;
         }
 
-        h3{
+        h3 {
             padding-left: 150px;
             color: #db3b3b;
         }
@@ -197,8 +221,8 @@
             height: 50px;
         }
 
-        p{
-            color:#333;
+        p {
+            color: #333;
             text-align: center;
             font-size: 13px;
         }
@@ -210,8 +234,8 @@
         <div id="head">
             <span id="logo1">
                 <a href="#"> <img src="../static/44.png" alt="" /></a>
-              </span>
-              <form method="post" id="right">
+            </span>
+            <form method="post" id="right">
                 <ul id="menu">
                     <li><input type="submit" value="修改信息" class="input" name="changeInfo" style="cursor:pointer"></li>
                     <li><input type="submit" value="注销账户" class="input" name="deleteItem" style="cursor:pointer"></li>
@@ -526,8 +550,10 @@
                         <input type="text" name="donateAmount" class="donate">
                     </td>
                     <td>
-                        <button type="submit" name="realname" class="donateButton" value="实名捐赠" style="cursor:pointer">实名捐赠</button>
-                        <button type="submit" name="anonymous" class="donateButton" value="匿名捐赠" style="cursor:pointer">匿名捐赠</button>
+                        <button type="submit" name="realname" class="donateButton" value="实名捐赠"
+                            style="cursor:pointer">实名捐赠</button>
+                        <button type="submit" name="anonymous" class="donateButton" value="匿名捐赠"
+                            style="cursor:pointer">匿名捐赠</button>
                     </td>
             </form>
             </tr>
@@ -569,4 +595,5 @@
         </div>
     </div>
 </body>
+
 </html>
