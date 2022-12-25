@@ -53,6 +53,7 @@ class Charity(db.Model):
     state = db.Column(db.String(32), unique=False, nullable=True)  # 此属性允许为空
     telephone = db.Column(db.String(32), unique=True)
     revenue = db.Column(db.Integer, unique=False)
+    zip = db.Column(db.String(32), unique=False)
     expense_id = db.Column(db.Integer, db.ForeignKey(
         'expense.id'), unique=False)  # 定义外键,expense_id为expense表的主键
     category_id = db.Column(db.Integer, db.ForeignKey(
@@ -240,7 +241,7 @@ def signUpCharity():
 
             try:
                 if not _category:
-                    _category = Category(category_id=10+Category.query.order_by(desc(Category.id)).first().id,
+                    _category = Category(category_id=1+Category.query.order_by(desc(Category.id)).first().id,
                                          category_name=category)
             except Exception as e:
                 print(e)
@@ -488,11 +489,11 @@ if __name__ == '__main__':
     db.session.commit()
     # 创建charity表元组c1,c2,c3
     c1 = Charity(charity_id="c001", password="c000001", category_id=category1.category_id, name="关爱动物中心", address="深圳南山区xxxx",
-                 city="深圳", state="广东", telephone="400-0987-1234", revenue=1000000, expense_id=e1.id)
+                 city="深圳", state="广东", telephone="400-0987-1234", revenue=1000000, expense_id=e1.id, zip=10000)
     c2 = Charity(charity_id="c002", password="c000002", category_id=category2.category_id, name="保护环境协会", address="广州增城区xxxx",
-                 city="广州", state="广东", telephone="400-5678-1234", revenue=500000, expense_id=e2.id)
+                 city="广州", state="广东", telephone="400-5678-1234", revenue=500000, expense_id=e2.id, zip=10001)
     c3 = Charity(charity_id="c003", password="c000003", category_id=category3.category_id, name="关爱儿童协会", address="东莞中唐镇xxxx",
-                 city="东莞", state="广东", telephone="400-3678-1234", revenue=20000000, expense_id=e3.id)
+                 city="东莞", state="广东", telephone="400-3678-1234", revenue=20000000, expense_id=e3.id, zip=10002)
     db.session.add_all([c1, c2, c3])
     db.session.commit()
     # 创建donor表元组d1,d2,d3
