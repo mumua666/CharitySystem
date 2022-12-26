@@ -209,6 +209,7 @@ def signUpCharity():
         program = request.form.get('program')
         admin = request.form.get('admin')
         fundraising = request.form.get('fundraising')
+        zip = request.form.get('zip')
         _name = Charity.query.filter_by(name=name).first()
         id = Charity.query.filter_by(charity_id=account).first()
         _telphone = Charity.query.filter_by(telephone=telphone).first()
@@ -241,8 +242,10 @@ def signUpCharity():
 
             try:
                 if not _category:
-                    _category = Category(category_id=1+Category.query.order_by(desc(Category.id)).first().id,
+                    _category = Category(category_id=1+Category.query.order_by(desc(Category.id)).first().category_id,
                                          category_name=category)
+                    db.session.add(_category)
+                    db.session.commit()
             except Exception as e:
                 print(e)
                 flash("填入数据错误！！！")
@@ -250,7 +253,7 @@ def signUpCharity():
 
             charity = Charity(charity_id=account, password=password2, category_id=_category.category_id,
                               name=name, address=street, city=city, state=state, telephone=telphone,
-                              revenue=revenue, expense_id=expense.id)
+                              revenue=revenue, expense_id=expense.id, zip=zip)
             db.session.add(charity)
             db.session.commit()
 
