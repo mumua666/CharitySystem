@@ -399,18 +399,14 @@ def homePage():
             displayGift = not displayGift
         # 如果用户点击了自定义查询中的查询类别名按钮
         elif categoryName:
-            if categoryName == "请输入类别名":
-                if categoryName == "请输入类别名" and not donorName:
-                    flash("请在输入框中填入信息!!!")
+            if category:
+                categoryName_Charity = Charity.query.filter_by(
+                    category_id=category.category_id)
+                gift = Gift.query.filter_by(
+                    category=categoryName).all()
+                displayCategory = True
             else:
-                if category:
-                    categoryName_Charity = Charity.query.filter_by(
-                        category_id=category.category_id)
-                    gift = Gift.query.filter_by(
-                        category=categoryName).all()
-                    displayCategory = True
-                else:
-                    flash("当前尚无"+categoryName+"类别慈善机构!!!")
+                flash("当前尚无"+categoryName+"类别慈善机构!!!")
         # 如果用户点击了自定义查询中的查询慈善机构按钮
         elif charityName:
             if checkCharity:
@@ -424,18 +420,15 @@ def homePage():
             if not all([last_name, first_name]):
                 flash("请填入完整姓氏和姓名!!!")
             else:
-                if donorName == "捐赠姓氏捐赠名字":
-                    flash("请在输入框中填入信息!!!")
+                aimedDonor = Donor.query.filter_by(
+                    last_name=last_name, first_name=first_name).first()
+                if aimedDonor:
+                    checkDonor = Gift.query.filter_by(
+                        gift_donor=aimedDonor.donor_id).all()
+                if checkDonor:
+                    displayCheckDonor = True
                 else:
-                    aimedDonor = Donor.query.filter_by(
-                        last_name=last_name, first_name=first_name).first()
-                    if aimedDonor:
-                        checkDonor = Gift.query.filter_by(
-                            gift_donor=aimedDonor.donor_id).all()
-                    if checkDonor:
-                        displayCheckDonor = True
-                    else:
-                        flash("当前尚无名为"+donorName+"的捐赠者!!!")
+                    flash("当前尚无名为"+donorName+"的捐赠者!!!")
         # 如果用户点击了捐赠按钮
         elif donorID:
             if not donateDonor:
@@ -463,6 +456,8 @@ def homePage():
                           log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
                 db.session.add_all([log, giftDonate])
                 db.session.commit()
+        elif not (categoryName or charityName or donorName):
+            flash("请在自定义查询框中输入数据先哦！")
     # 当用户访问到该路由(/homePage)则返回homePage.index文件,并返回下面的参数
     return render_template('homePage.html',  logID=logID, logName=logName,
                            donors=donors, charities=charities, gifts=gifts,
