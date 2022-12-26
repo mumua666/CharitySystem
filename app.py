@@ -57,7 +57,7 @@ class Charity(db.Model):
     expense_id = db.Column(db.Integer, db.ForeignKey(
         'expense.id'), unique=False)  # 定义外键,expense_id为expense表的主键
     category_id = db.Column(db.Integer, db.ForeignKey(
-        'category.category_id'), unique=False)
+        'category.category_id'), unique=False)  # 定义外键,category_id为category表的主键
     # 通过expenses获取到以expense_id为主键的expense表的元组
     expenses = db.relationship('Expense', backref='charity')
     category = db.relationship('Category', backref='charity')
