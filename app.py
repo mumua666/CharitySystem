@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, request,  redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 import datetime
+import time
 # 创建Flask对象app
 app = Flask(__name__)
 # 人为入栈,解决上下文冲突
@@ -108,6 +109,15 @@ class Log(db.Model):
     log_time = db.Column(db.String(255), unique=False)
 
 
+class LogIn(db.Model):
+    # 定义表名
+    __tablename__ = "logIn"
+    # 定义列对象
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    log_id = db.Column(db.String(255), unique=False)
+    log_time = db.Column(db.String(255), unique=False)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
@@ -132,7 +142,9 @@ def index():
             curr_time = datetime.datetime.now()
             log = Log(log_id=account, operation_name="登录",
                       log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
-            db.session.add(log)
+            logIn = LogIn(log_id=account, log_time=datetime.datetime.strftime(
+                curr_time, '%Y-%m-%d %H:%M:%S'))
+            db.session.add_all([log, logIn])
             db.session.commit()
             return redirect(url_for('homePage'))
 
@@ -292,6 +304,13 @@ def homePage():
     donor = Donor.query.filter_by(donor_id=logID.log_id).first()
     # 获取charity表中charity_id为当前登录id的元组
     charity = Charity.query.filter_by(charity_id=logID.log_id).first()
+    LogInID = LogIn.query.order_by(desc(LogIn.log_time)).first()
+
+    logTime = ""
+    if LogInID:
+        logTime = time.strptime(LogInID.log_time, '%Y-%m-%d %H:%M:%S')
+    if not LogInID or time.mktime(datetime.datetime.now().timetuple())-time.mktime(logTime) > 500:
+        return redirect(url_for("index"))
 
     # 此处定义homePage页面显示与否判断的bool变量
     displayCharity = False
@@ -349,6 +368,7 @@ def homePage():
         # 如果用户点击了退出登录按钮，则直接返回主页面
         if logout:
             # 重定向到index路由
+            LogInID = False
             return redirect(url_for('index'))
         # 如果用户点击了修改信息按钮，则返回注册界面
         elif changeInfo:
