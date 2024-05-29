@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    width: 1580px;
+    min-width: 1200px;
+  }
+
+  #logogroup {
+    display: inline-block;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 5%);
+  }
+
+  #logo1 a {
+    padding-left: 80px;
+  }
+
+  #main {
+    background-color: #fafbfc;
+    width: 100%;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  #left {
+    float: left;
+    padding-left: 150px;
+    padding-top: 60px;
+    height: 480px;
+    width: 480px;
+  }
+
+  #right {
+    float: left;
+    height: 550px;
+    width: 550px;
+    padding-top: 60px;
+    padding-left: 200px;
+  }
+
+  table {
+    text-align: center;
+    border: 1px;
+    background-color: #fff;
+    width: 550px;
+    height: 520px;
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 5%);
+  }
+
+  th {
+    color: #42464a;
+    font-size: 23px;
+    text-align: center;
+  }
+
+  button {
+    height: 70px;
+    width: 85%;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    box-sizing: border-box;
+    text-align: left;
+    border: none;
+    background-color: #fdebeb;
+  }
+
+  #red {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    line-height: 40px;
+  }
+
+  a {
+    position: relative;
+    top: -30%;
+    text-decoration: none;
+    padding-left: 10px;
+    color: red;
+  }
+
+  a:visited {
+    color: red;
+  }
+
+  #button1 {
+    position: relative;
+    top: -10%;
+  }
+
+  #button2 {
+    position: relative;
+    top: -25%;
+  }
+
+  img {
+    padding-left: 10px;
+    padding-top: 2px;
+  }

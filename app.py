@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 import datetime
 import time
+
 # 创建Flask对象app
 app = Flask(__name__)
 # 人为入栈,解决上下文冲突

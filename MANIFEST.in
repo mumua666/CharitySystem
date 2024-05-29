@@ -1,0 +1,27 @@
+# 包括所有的静态文件和模板
+recursive-include yourapp/static *
+recursive-include yourapp/templates *
+
+# 包括 SQL 文件和其他数据文件
+include yourapp/schema.sql
+recursive-include yourapp/data *.json
+
+# 包括文档文件
+recursive-include docs *.txt
+recursive-include docs *.md
+
+# 包括根目录下的重要文件
+include README.md
+include LICENSE
+include requirements.txt
+
+# 排除不需要包括在安装包中的文件
+exclude *.log
+exclude *.cfg
+
+# 排除特定目录
+prune tests
+prune examples
+
+# 包括配置文件，如果有的话
+include yourapp/config/default.conf
