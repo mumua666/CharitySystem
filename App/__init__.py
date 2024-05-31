@@ -1,7 +1,7 @@
 # __init__.py:初始化文件 创建Flask应用
 
 from flask import Flask
-from .view import blue
+from view import blue
 
 def create_app():
 
