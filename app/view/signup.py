@@ -7,7 +7,7 @@ from app.model import Category, Expense, Charity, Donor, Log
 
 @app.route('/signUp.html', methods=['GET', 'POST'])
 def signUp():
-    return render_template('signUp.html')
+    return render_template('signUp/signUp.html')
 
 
 @app.route('/signUpDonor.html', methods=['GET', 'POST'])
@@ -53,7 +53,7 @@ def signUpDonor():
 
             return redirect(url_for('index'))
 
-    return render_template('signUpDonor.html')
+    return render_template('signUp/signUpDonor.html')
 
 
 @app.route('/signUpCharity.html', methods=['GET', 'POST'])
@@ -131,4 +131,4 @@ def signUpCharity():
 
             return redirect(url_for('index'))
 
-    return render_template('signUpCharity.html')
+    return render_template('signUp/signUpCharity.html')

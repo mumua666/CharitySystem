@@ -25,13 +25,13 @@ def index():
         elif not (p1 == password or p2 == password):
             flash("密码错误!!!")
         else:
-            curr_time = datetime.datetime.now()
+            curr_time = datetime.now()
             log = Log(log_id=account, operation_name="登录",
-                      log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
-            logIn = LogIn(log_id=account, log_time=datetime.datetime.strftime(
+                      log_time=datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+            logIn = LogIn(log_id=account, log_time=datetime.strftime(
                 curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add_all([log, logIn])
             db.session.commit()
             return redirect(url_for('homePage'))
 
-    return render_template('index.html')
+    return render_template('index/index.html')

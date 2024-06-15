@@ -1,4 +1,5 @@
-from datetime import datetime, time
+from datetime import datetime
+import time
 from flask import flash, redirect, render_template, request, url_for
 from sqlalchemy import desc
 from app import db, app
@@ -7,6 +8,7 @@ from app.model import Donor, Charity, Gift, Log, LogIn, Category
 
 @app.route('/homePage.html', methods=['GET', 'POST'])
 def homePage():
+
     # 通过SQLAlchemy提供的查询函数进行数据库数据查询
     # 查询donor表全部数据
     donors = Donor.query.all()
@@ -27,7 +29,7 @@ def homePage():
     logTime = ""
     if LogInID:
         logTime = time.strptime(LogInID.log_time, '%Y-%m-%d %H:%M:%S')
-    if not LogInID or time.mktime(datetime.datetime.now().timetuple())-time.mktime(logTime) > 500:
+    if not LogInID or time.mktime(datetime.now().timetuple())-time.mktime(logTime) > 500:
         return redirect(url_for("index"))
 
     # 此处定义homePage页面显示与否判断的bool变量
@@ -91,19 +93,19 @@ def homePage():
         # 如果用户点击了修改信息按钮，则返回注册界面
         elif changeInfo:
             # 获取系统当前时间
-            curr_time = datetime.datetime.now()
+            curr_time = datetime.now()
             log = ''
             # 在log表中记录相应操作
             if donor:
                 db.session.delete(donor)
                 log = Log(log_id=logID.log_id,  operation_table='donor',
                           operation_name="修改", operation_tuple=logID.log_id,
-                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+                          log_time=datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             elif charity:
                 db.session.delete(charity)
                 log = Log(log_id=logID.log_id,  operation_table='charity',
                           operation_name="修改", operation_tuple=logID.log_id,
-                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+                          log_time=datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             if donor:
@@ -112,19 +114,19 @@ def homePage():
                 return redirect(url_for('signUpCharity'))
         # 如果用户点击了注销账号按钮，则从数据库中删除该元组并返回注册页面
         elif deleteItem:
-            curr_time = datetime.datetime.now()
+            curr_time = datetime.now()
             log = ''
             # 在log表中记录相应操作
             if donor:
                 db.session.delete(donor)
                 log = Log(log_id=logID.log_id,  operation_table='donor',
                           operation_name="删除", operation_tuple=logID.log_id,
-                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+                          log_time=datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             elif charity:
                 db.session.delete(charity)
                 log = Log(log_id=logID.log_id,  operation_table='charity',
                           operation_name="删除", operation_tuple=logID.log_id,
-                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+                          log_time=datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
             db.session.add(log)
             db.session.commit()
             return redirect(url_for('index'))
@@ -174,11 +176,11 @@ def homePage():
             elif not donateCharity:
                 flash("该慈善机构ID并不存在!")
             else:
-                curr_time = datetime.datetime.now()
+                curr_time = datetime.now()
                 if realname:
                     giftDonate = Gift(gift_name=donateType, gift_donor=donorID, gift_charity=charityID,
                                       category=donateCharity.category.category_name,
-                                      date=datetime.datetime.strftime(
+                                      date=datetime.strftime(
                                           curr_time, '%Y-%m-%d %H:%M:%S'),
                                       amount=donateAmount)
                 elif anonymous:
@@ -187,17 +189,17 @@ def homePage():
                     donateAmount = int(1.5*int(donateAmount))
                     giftDonate = Gift(gift_name=donateType, gift_donor=anonymousID.donor_id, gift_charity=charityID,
                                       category=donateCharity.category.category_name,
-                                      date=datetime.datetime.strftime(
+                                      date=datetime.strftime(
                                           curr_time, '%Y-%m-%d %H:%M:%S'),
                                       amount=donateAmount)
                 log = Log(log_id=donorID, operation_table='gift', operation_name="添加", operation_tuple=Gift.query.count()+1,
-                          log_time=datetime.datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
+                          log_time=datetime.strftime(curr_time, '%Y-%m-%d %H:%M:%S'))
                 db.session.add_all([log, giftDonate])
                 db.session.commit()
         elif not (categoryName or charityName or donorName):
             flash("请在自定义查询框中输入数据先哦！")
     # 当用户访问到该路由(/homePage)则返回homePage.index文件,并返回下面的参数
-    return render_template('homePage.html',  logID=logID, logName=logName,
+    return render_template('home/homePage.html',  logID=logID, logName=logName,
                            donors=donors, charities=charities, gifts=gifts,
                            displayCharity=displayCharity, displayDonor=displayDonor, displayGift=displayGift,
                            categoryName=categoryName, categoryName_Charity=categoryName_Charity, displayCategory=displayCategory,

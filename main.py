@@ -1,4 +1,5 @@
 from app import db, app, init
+from app.view import *
 
 
 if __name__ == '__main__':

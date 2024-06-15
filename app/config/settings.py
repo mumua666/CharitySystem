@@ -1,7 +1,7 @@
 # 定义数据库连接时各个字段
 USERNAME='root'
 PASSWORD='123456'
-HOSTNAME = 'www.xinchuangdaibu.top'
+HOSTNAME = '172.23.232.111'
 PORT='3306'
 DATABASE='CharitySystem'
 
