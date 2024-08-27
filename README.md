@@ -129,3 +129,33 @@
 # 官方文档
 
 `https://dormousehole.readthedocs.io/en/2.3.2/`
+
+# 效果展示
+
+## 登录页
+
+![login](./README/login.png "login")
+
+## 注册页
+
+![register](./README/register.png "register")
+
+## 捐赠者注册页
+
+![donor_register](./README/donor_register.png "donor_register")
+
+## 慈善机构注册页
+
+![charity_register](./README/charity_register.png "charity_register")
+
+## 登陆后主页
+
+![homepage](./README/homepage.png "homepage")
+
+## 登陆后查询页
+
+![search](./README/search.png "search")
+
+# 注意事项
+
+本程序第一版是以 PostgreSQL 数据搭建，重构后版本采用 MySQL 数据库。不同数据库搭建方式有所不同，安装好数据库后，只需配置好数据库用户名，密码和保存的数据库名即可。配置信息在 `app/config/settings.py`文件中

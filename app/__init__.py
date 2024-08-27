@@ -1,9 +1,12 @@
 # __init__.py:初始化文件 创建Flask应用
+from pathlib import Path
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from .db import init
 
 # 常见db和app对象
+
+
 def create():
 
     # 创建Flask对象app
@@ -12,7 +15,8 @@ def create():
     ctx = app.app_context()
     ctx.push()
     # 引入数据库配置文件settings.py
-    app.config.from_pyfile('config\\settings.py')
+    config_path = str(Path('.')/'config'/'settings.py')
+    app.config.from_pyfile(config_path)
     # 创建数据库对象db
     db = SQLAlchemy(app)
 
